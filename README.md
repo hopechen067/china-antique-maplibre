@@ -9,7 +9,18 @@ https://hopechen067.github.io/china-antique-maplibre/
 
 Anyone can open that link in a browser (needs internet for EOX satellite + Terrarium DEM tiles). No install required.
 
-Static screenshots (if the live map is slow to load):
+### Production references · 河西四郡 (ep.07)
+
+Real output from the author’s Hexi corridor series (map storytelling), used as the visual target for this stack:
+
+| | |
+|--|--|
+| **Short clip** | [marketing/hexi-ep07/hexi-ep07-map-clip.mp4](marketing/hexi-ep07/hexi-ep07-map-clip.mp4) (~36s, compressed) |
+| **Cover** | ![cover](marketing/hexi-ep07/cover-hexi-four-commanderies.jpg) |
+| **Map stills** | [still-01](marketing/hexi-ep07/still-01-open.jpg) · [still-02](marketing/hexi-ep07/still-02-corridor.jpg) · [still-03](marketing/hexi-ep07/still-03-commanderies.jpg) · [still-04](marketing/hexi-ep07/still-04-route.jpg) · [still-05](marketing/hexi-ep07/still-05-close.jpg) |
+| **More** | [marketing/hexi-ep07/](marketing/hexi-ep07/) |
+
+Tuner-only screenshots (EOX demo):
 
 - [marketing/preview-eox-china.png](marketing/preview-eox-china.png) — national view  
 - [marketing/preview-eox-hexi.png](marketing/preview-eox-hexi.png) — Hexi / Qinghai style zoom  
@@ -65,9 +76,15 @@ node verify.mjs
 
 EOX public tiles are for **non-commercial** use with attribution; they are ~10 m imagery (not street-level). This project does **not** grant rights to Gaode/Amap, Google, Mapbox, or other commercial providers.
 
-## Marketing stills
+## Marketing & reference media
 
-Optional screenshots under `marketing/` (hero / features / before-after). Treat as demo media; not a free stock license (see LICENSE exceptions). Production source stills are **not** included in the public tree.
+Under `marketing/`:
+
+- `hexi-ep07/` — **河西四郡** production clip + stills (see above)  
+- `preview-eox-*.png` — live tuner captures  
+- older hero / feature composites if present  
+
+Treat as **demo media** for this project (LICENSE marketing exception). Not free stock for third-party commercial reuse. Full episode masters are **not** uploaded (too large).
 
 ## Tiles are NOT bundled
 
