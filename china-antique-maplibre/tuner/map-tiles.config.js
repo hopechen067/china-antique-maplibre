@@ -1,10 +1,7 @@
 /**
- * Default tile config for the public / OSS tuner.
- * Basemap: EOX Sentinel-2 cloudless (MapLibre-style public WMTS demo).
- * Public maps.eox.at use is generally non-commercial + attribution required —
- * commercial video: use map-tiles.config.local.js with your licensed source.
- *
- * For personal overrides, create map-tiles.config.local.js (gitignored).
+ * Default tile config for the public tuner.
+ * Basemap: EOX Sentinel-2 cloudless (public WMTS demo; follow EOX terms).
+ * For other basemaps, use map-tiles.config.local.js (gitignored).
  */
 window.MAP_TILE_CONFIG = {
   satellite: {

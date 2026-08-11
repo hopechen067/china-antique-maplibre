@@ -26,7 +26,7 @@ Do **not** use the tuner page as the final render host.
 ## Workflow
 
 1. Serve tuner: `cd tuner && python -m http.server 8765` → `http://localhost:8765/`
-2. Tiles: default OSS config uses **EOX Sentinel-2 cloudless** + Terrarium (`tuner/map-tiles.config.js`). Override with gitignored `map-tiles.config.local.js` for commercial high-res.
+2. Tiles: default config uses **EOX Sentinel-2 cloudless** + Terrarium (`tuner/map-tiles.config.js`). Override with gitignored `map-tiles.config.local.js` for other sources.
 3. Apply default preset [`tuner/preset-antique-default.json`](tuner/preset-antique-default.json) (same content as [`tuner/presets/antique-default.json`](tuner/presets/antique-default.json)).
 4. Adjust satellite / hillshade / water / CSS / UI toggles until the look locks.
 5. **Export JSON** from the tuner (copy or download).
@@ -38,7 +38,7 @@ Do **not** use the tuner page as the final render host.
 ## Hard rules
 
 - **Tiles not bundled** — MapLibre fetches DEM (and optional basemap) at runtime from **configured** URLs only.
-- **No default commercial satellite hotlink** — enable basemap only with endpoints you are allowed to use.
+- **Only use basemap endpoints you are allowed to use** — defaults are public demo tiles (EOX); swap via config when needed.
 - **`encoding: 'terrarium'`** on the terrain source — mandatory.
 - **No `easeTo` / `flyTo`** in recorded production paths; prefer `jumpTo` + `idle`.
 - **Do not host final render on tuner.**

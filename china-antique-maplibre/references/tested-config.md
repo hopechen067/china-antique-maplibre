@@ -8,7 +8,7 @@ Production-proven stack for the antique parchment look. No project-specific path
 
 - Type: `raster` tiles
 - **Default public config:** EOX Sentinel-2 cloudless (`s2cloudless-2020`, template `{z}/{y}/{x}`, maxzoom ~14)
-- Public EOX WMTS is generally **non-commercial** + attribution required; for commercial high-res (e.g. domestic providers) use `map-tiles.config.local.js`
+- Public EOX WMTS typically requires attribution and has use restrictions; for other basemaps use `map-tiles.config.local.js`
 - Configure via `tuner/map-tiles.config.js` or gitignored `map-tiles.config.local.js`
 - Layer id defaults to `satellite`; paint from preset `maplibre.satellite.*`
 

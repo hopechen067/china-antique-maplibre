@@ -1,8 +1,8 @@
 /**
  * Map tile configuration (EXAMPLE — copy to map-tiles.config.js).
  *
- * Default public builds ship map-tiles.config.js with satellite DISABLED so
- * this repo does not hard-wire a commercial map vendor's tile endpoints.
+ * Defaults ship EOX Sentinel-2 in map-tiles.config.js. Do not hard-wire
+ * vendor endpoints you are not allowed to redistribute.
  *
  * You may only enable satellite tiles if your use is allowed by that provider
  * (official key / contract / self-hosted cache). This project grants no tile license.
@@ -29,8 +29,7 @@ window.MAP_TILE_CONFIG = {
     // Source id used in MapLibre style (keep stable if you migrate presets)
     sourceId: 'basemapRaster',
     layerId: 'satellite',
-    // Commercial / high-res (e.g. Gaode with your own legal endpoint) — local only:
-    // tiles: ['https://YOUR-LEGAL-TILE-HOST/{z}/{x}/{y}.png'],
+    // Other basemaps (local only): tiles: ['https://YOUR-HOST/{z}/{x}/{y}.png'],
   },
 
   /**

@@ -1,7 +1,7 @@
 # NOTICE — third-party components and services
 
 This project wires several independent components. Comply with each license
-and terms of service for your use case (including commercial video production).
+and terms of service for your use case.
 
 ## Bundled / loaded at runtime
 

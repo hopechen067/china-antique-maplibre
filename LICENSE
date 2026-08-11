@@ -26,15 +26,15 @@ SCOPE / EXCEPTIONS (not covered by the MIT grant above)
 1. Geographic overlay data
    - china-antique-maplibre/tuner/assets/water-data.js
    - china-antique-maplibre/tuner/assets/water-manifest.json
-   See DATA-PROVENANCE.md. These files are shipped for local demo / production
-   overlay convenience. They are NOT licensed under MIT until their upstream
-   provenance is fully documented and cleared. Redistribute or commercialize
-   that data only if you independently hold the rights.
+   See DATA-PROVENANCE.md. These files are provided for demo convenience.
+   They are NOT licensed under MIT until upstream provenance is fully
+   documented and cleared. Redistribute that data only if you independently
+   hold the rights.
 
-2. Marketing / screenshot assets under marketing/
-   Project screenshots and composites. Unless a file states otherwise, treat
-   them as All Rights Reserved demo media (view/share of the repo README is
-   fine; do not assume a free commercial media license).
+2. Showcase media under showcases/
+   Screenshots and short clips for the project README. Unless a file states
+   otherwise, treat them as All Rights Reserved demo media (viewing them in
+   the repository is fine; do not assume a free stock / re-licensing grant).
 
 3. Third-party services and libraries
    MapLibre GL JS, Three.js, tile providers (e.g. AWS Terrarium, any basemap

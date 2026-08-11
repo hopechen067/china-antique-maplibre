@@ -7,7 +7,7 @@ on:
     branches: [master, main]
     paths:
       - "china-antique-maplibre/tuner/**"
-      - "marketing/hexi-ep07/**"
+      - "showcases/hexi-ep07/**"
       - ".github/workflows/deploy-pages.yml"
   workflow_dispatch:
 
@@ -44,8 +44,8 @@ jobs:
             china-antique-maplibre/tuner/ _site/
           # Demo clip for README / site embed (served as video/mp4, not raw attachment)
           mkdir -p _site/media
-          if [ -f marketing/hexi-ep07/hexi-ep07-demo-480p.mp4 ]; then
-            cp -f marketing/hexi-ep07/hexi-ep07-demo-480p.mp4 _site/media/
+          if [ -f showcases/hexi-ep07/hexi-ep07-demo-480p.mp4 ]; then
+            cp -f showcases/hexi-ep07/hexi-ep07-demo-480p.mp4 _site/media/
           fi
           # Prevent Jekyll from ignoring underscore paths
           touch _site/.nojekyll

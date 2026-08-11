@@ -23,15 +23,11 @@ node_modules/
 .python-version
 __pycache__/
 
-# Local marketing working copies (never re-add production source stills)
-marketing/_src_*/
-marketing/_src_*/
-
 # Optional large local water rebuilds
 *.geojson.bak
 water-data.full.js
 
-# Local preview helpers (not part of product)
+# Local preview helpers
 .preview-tools/
 china-antique-maplibre/tuner/_serve.cjs
 china-antique-maplibre/tuner/_serve.mjs

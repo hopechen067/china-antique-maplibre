@@ -22,8 +22,8 @@ Internal processing labels (not a legal source citation):
 **Not under the repository MIT license.**  
 Upstream dataset name, version, download URL, and redistributable license are **not fully recorded** in this repository. Until that chain is documented and cleared:
 
-- Treat the overlay as **demo / internal production convenience data**.
-- Do **not** assume you may re-publish, sell, or sublicense the GeoJSON as open data.
+- Treat the overlay as **demo convenience data**, not open data under MIT.
+- Do **not** assume you may re-publish or sublicense the GeoJSON as open data.
 - For a fully open stack, replace with data you can license (e.g. self-derived OSM extracts, Natural Earth where applicable, or licensed hydrography) and update this file + `water-manifest.json`.
 
 ### Replacing the overlay
