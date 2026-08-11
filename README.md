@@ -4,28 +4,47 @@ Open-source **antique parchment** MapLibre stack for China historical maps and s
 
 ## Live demo
 
-**Interactive tuner (GitHub Pages):**  
-https://hopechen067.github.io/china-antique-maplibre/
+**Interactive tuner:** https://hopechen067.github.io/china-antique-maplibre/  
+(EOX satellite + Terrarium DEM need internet. No install.)
 
-Anyone can open that link in a browser (needs internet for EOX satellite + Terrarium DEM tiles). No install required.
+## Showcases
 
-### Production reference · 河西四郡 (ep.07)
+Production stills from the author’s **河西走廊 · 河西四郡 (ep.07)** series, plus live tuner captures — the look this stack is built for.
 
-Map storytelling sample from the author’s Hexi series.  
-**Do not use `raw.githubusercontent.com` for video** — GitHub serves those as downloads. This clip is hosted on **GitHub Pages** (`video/mp4`) so the player can stream it.
+<table>
+  <tr>
+    <td align="center" width="50%">
+      <img src="marketing/hexi-ep07/still-01-open.jpg" alt="武威 · 绿洲与石羊河 callout" />
+      <br /><sub>武威 · 绿洲 / 石羊河</sub>
+    </td>
+    <td align="center" width="50%">
+      <img src="marketing/hexi-ep07/still-03-commanderies.jpg" alt="酒泉 · 地形与水系" />
+      <br /><sub>酒泉 · 地形 + 水系</sub>
+    </td>
+  </tr>
+  <tr>
+    <td align="center" width="50%">
+      <img src="marketing/hexi-ep07/still-02-corridor.jpg" alt="走廊视角" />
+      <br /><sub>河西走廊地图镜头</sub>
+    </td>
+    <td align="center" width="50%">
+      <img src="marketing/hexi-ep07/still-05-close.jpg" alt="近景城站" />
+      <br /><sub>城站近景</sub>
+    </td>
+  </tr>
+  <tr>
+    <td align="center" width="50%">
+      <img src="marketing/preview-eox-china.png" alt="Tuner 全国视角" />
+      <br /><sub>Tuner · 全国视角 (EOX)</sub>
+    </td>
+    <td align="center" width="50%">
+      <img src="marketing/preview-eox-hexi.png" alt="Tuner 河西视角" />
+      <br /><sub>Tuner · 河西 / 山影</sub>
+    </td>
+  </tr>
+</table>
 
-https://hopechen067.github.io/china-antique-maplibre/media/hexi-ep07-demo-480p.mp4
-
-<video
-  controls
-  playsinline
-  preload="metadata"
-  width="720"
-  src="https://hopechen067.github.io/china-antique-maplibre/media/hexi-ep07-demo-480p.mp4">
-</video>
-
-- Longer clip (~36s, in-repo file): [hexi-ep07-map-clip.mp4](marketing/hexi-ep07/hexi-ep07-map-clip.mp4)  
-- Live **map** tuner: https://hopechen067.github.io/china-antique-maplibre/  
+More assets: [marketing/hexi-ep07/](marketing/hexi-ep07/) · optional clip [hexi-ep07-map-clip.mp4](marketing/hexi-ep07/hexi-ep07-map-clip.mp4)
 
 | Item | Value |
 |------|--------|
