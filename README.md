@@ -1,5 +1,7 @@
 # china-antique-maplibre
 
+**English** | [中文](README.zh-CN.md)
+
 Open-source **antique parchment** MapLibre stack for China historical maps and short-form video production (HyperFrames or any MapLibre host).
 
 ## Live demo
@@ -81,7 +83,9 @@ Optional asset check (requires Node on `PATH`):
 ```bash
 cd china-antique-maplibre/tuner
 node verify.mjs
-```## Features
+```
+
+## Features
 
 - **Configurable raster basemap** — default is [EOX Sentinel-2 cloudless](https://s2maps.eu) (MapLibre-style public demo; attribution + non-commercial public use). Override with `map-tiles.config.local.js` for licensed commercial imagery.
 - **Terrarium hillshade + terrain** — `encoding: 'terrarium'` is mandatory.
@@ -131,7 +135,8 @@ Satellite and DEM tiles are **not** shipped. At runtime MapLibre requests only w
 ├── NOTICE.md
 ├── DATA-PROVENANCE.md
 ├── SECURITY.md
-├── README.md
+├── README.md                  # English
+├── README.zh-CN.md            # 中文
 ├── marketing/                 # optional screenshots
 └── china-antique-maplibre/
     ├── SKILL.md
