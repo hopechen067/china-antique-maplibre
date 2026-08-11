@@ -26,7 +26,7 @@ Do **not** use the tuner page as the final render host.
 ## Workflow
 
 1. Serve tuner: `cd tuner && python -m http.server 8765` → `http://localhost:8765/`
-2. Configure tiles if needed: `tuner/map-tiles.config.js` or gitignored `map-tiles.config.local.js` (see `map-tiles.config.example.js`). Default OSS config has **satellite disabled**.
+2. Tiles: default OSS config uses **EOX Sentinel-2 cloudless** + Terrarium (`tuner/map-tiles.config.js`). Override with gitignored `map-tiles.config.local.js` for commercial high-res.
 3. Apply default preset [`tuner/preset-antique-default.json`](tuner/preset-antique-default.json) (same content as [`tuner/presets/antique-default.json`](tuner/presets/antique-default.json)).
 4. Adjust satellite / hillshade / water / CSS / UI toggles until the look locks.
 5. **Export JSON** from the tuner (copy or download).

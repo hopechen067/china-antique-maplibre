@@ -31,5 +31,11 @@ marketing/_src_*/
 *.geojson.bak
 water-data.full.js
 
+# Local preview helpers (not part of product)
+.preview-tools/
+china-antique-maplibre/tuner/_serve.cjs
+china-antique-maplibre/tuner/_serve.mjs
+china-antique-maplibre/tuner/_preview_eox.cjs
+
 # Git / tooling noise
 *.stackdump

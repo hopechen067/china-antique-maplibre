@@ -6,7 +6,7 @@ Open-source **antique parchment** MapLibre stack for China historical maps and s
 |------|--------|
 | Skill folder | `china-antique-maplibre` |
 | Runtime | [MapLibre GL JS](https://maplibre.org/) |
-| Default basemap | **None** (satellite off) — configure your own legal raster tiles |
+| Default basemap | **EOX Sentinel-2 cloudless** (public demo WMTS; non-commercial terms — swap for production) |
 | Terrain / hillshade | AWS Terrarium DEM tiles (runtime fetch; `encoding: 'terrarium'`) |
 | Water | Full-China overlay in `tuner/assets/water-data.js` — **not MIT**; see [DATA-PROVENANCE.md](DATA-PROVENANCE.md) |
 | Look | Antique CSS tuner + tiered settlement extrusions (`HanCity3D`) |
@@ -31,7 +31,7 @@ node verify.mjs
 
 ## Features
 
-- **Configurable raster basemap** — satellite/other tiles only if you set them in `map-tiles.config.js` or gitignored `map-tiles.config.local.js`. Defaults ship with satellite **disabled** so the repo does not hard-wire a commercial vendor endpoint.
+- **Configurable raster basemap** — default is [EOX Sentinel-2 cloudless](https://s2maps.eu) (MapLibre-style public demo; attribution + non-commercial public use). Override with `map-tiles.config.local.js` for licensed commercial imagery.
 - **Terrarium hillshade + terrain** — `encoding: 'terrarium'` is mandatory.
 - **China water overlay** — rivers (3 levels) + lakes + narrative highlight systems (data terms: DATA-PROVENANCE.md).
 - **Antique CSS tuner** — live sepia / warm tint / vignette / paint controls; export JSON presets.
@@ -40,10 +40,10 @@ node verify.mjs
 ## Configure map tiles
 
 1. Read [NOTICE.md](NOTICE.md) (third-party ToS).
-2. Copy or edit `china-antique-maplibre/tuner/map-tiles.config.js`.
-3. For personal keys/endpoints, prefer `map-tiles.config.local.js` (gitignored). See `map-tiles.config.example.js`.
+2. Default config (`map-tiles.config.js`) uses EOX Sentinel-2 cloudless + Terrarium DEM.
+3. For commercial/high-res Chinese satellite, use gitignored `map-tiles.config.local.js` with a source you are allowed to use. See `map-tiles.config.example.js`.
 
-This project **does not** grant rights to Gaode/Amap, Google, Mapbox, or any other tile provider. You must use endpoints allowed by your account and jurisdiction.
+EOX public tiles are for **non-commercial** use with attribution; they are ~10 m imagery (not street-level). This project does **not** grant rights to Gaode/Amap, Google, Mapbox, or other commercial providers.
 
 ## Marketing stills
 

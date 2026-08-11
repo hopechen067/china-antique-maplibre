@@ -4,14 +4,13 @@ Production-proven stack for the antique parchment look. No project-specific path
 
 ## Sources
 
-### Satellite / raster basemap (optional)
+### Satellite / raster basemap
 
 - Type: `raster` tiles
-- **Default public config:** disabled (`map-tiles.config.js` → `satellite.enabled: false`)
-- Enable only with tile URL templates **you are allowed to use** (official key, contract, or self-hosted cache)
+- **Default public config:** EOX Sentinel-2 cloudless (`s2cloudless-2020`, template `{z}/{y}/{x}`, maxzoom ~14)
+- Public EOX WMTS is generally **non-commercial** + attribution required; for commercial high-res (e.g. domestic providers) use `map-tiles.config.local.js`
 - Configure via `tuner/map-tiles.config.js` or gitignored `map-tiles.config.local.js`
 - Layer id defaults to `satellite`; paint from preset `maplibre.satellite.*`
-- This project does **not** grant a basemap tile license and does **not** ship a commercial vendor URL as the default
 
 ### Terrain DEM (AWS Terrarium)
 

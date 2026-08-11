@@ -1,17 +1,22 @@
 /**
  * Default tile config for the public / OSS tuner.
- * Satellite basemap is OFF — enable only with tiles you are licensed to use
- * (see map-tiles.config.example.js and root NOTICE.md).
+ * Basemap: EOX Sentinel-2 cloudless (MapLibre-style public WMTS demo).
+ * Public maps.eox.at use is generally non-commercial + attribution required —
+ * commercial video: use map-tiles.config.local.js with your licensed source.
  *
  * For personal overrides, create map-tiles.config.local.js (gitignored).
  */
 window.MAP_TILE_CONFIG = {
   satellite: {
-    enabled: false,
-    tiles: [],
+    enabled: true,
+    // Note tile template order: {z}/{y}/{x} (not z/x/y)
+    tiles: [
+      'https://tiles.maps.eox.at/wmts/1.0.0/s2cloudless-2020_3857/default/g/{z}/{y}/{x}.jpg',
+    ],
     tileSize: 256,
-    maxzoom: 18,
-    attribution: '',
+    maxzoom: 14,
+    attribution:
+      'Sentinel-2 cloudless © <a href="https://s2maps.eu">EOX</a> · modified Copernicus Sentinel data 2020',
     sourceId: 'basemapRaster',
     layerId: 'satellite',
   },
@@ -27,5 +32,5 @@ window.MAP_TILE_CONFIG = {
     attribution: '© AWS Terrain Tiles (Terrarium)',
     sourceId: 'terrain',
   },
-  uiAttribution: '底图：未配置卫星 · 地形 DEM：AWS Terrarium',
+  uiAttribution: '底图：EOX Sentinel-2 cloudless · 地形 DEM：AWS Terrarium',
 };

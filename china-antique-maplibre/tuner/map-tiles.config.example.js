@@ -16,18 +16,21 @@ window.MAP_TILE_CONFIG = {
    * Leave tiles empty / enabled:false for terrain + water + CSS-only demo.
    */
   satellite: {
-    enabled: false,
-    // Example shape only — replace with endpoints YOU are allowed to use:
-    // tiles: [
-    //   'https://YOUR-LEGAL-TILE-HOST/{z}/{x}/{y}.png',
-    // ],
-    tiles: [],
+    // OSS default (also in map-tiles.config.js): EOX Sentinel-2 cloudless
+    enabled: true,
+    tiles: [
+      // Note {z}/{y}/{x} order for this WMTS template
+      'https://tiles.maps.eox.at/wmts/1.0.0/s2cloudless-2020_3857/default/g/{z}/{y}/{x}.jpg',
+    ],
     tileSize: 256,
-    maxzoom: 18,
-    attribution: '',
+    maxzoom: 14,
+    attribution:
+      'Sentinel-2 cloudless © <a href="https://s2maps.eu">EOX</a> · modified Copernicus Sentinel data 2020',
     // Source id used in MapLibre style (keep stable if you migrate presets)
     sourceId: 'basemapRaster',
     layerId: 'satellite',
+    // Commercial / high-res (e.g. Gaode with your own legal endpoint) — local only:
+    // tiles: ['https://YOUR-LEGAL-TILE-HOST/{z}/{x}/{y}.png'],
   },
 
   /**
@@ -48,5 +51,5 @@ window.MAP_TILE_CONFIG = {
   },
 
   /** Short label for the on-map attribution strip */
-  uiAttribution: '底图：未配置卫星 · 地形 DEM：AWS Terrarium',
+  uiAttribution: '底图：EOX Sentinel-2 cloudless · 地形 DEM：AWS Terrarium',
 };
