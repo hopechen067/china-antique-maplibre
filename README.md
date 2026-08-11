@@ -9,21 +9,20 @@ https://hopechen067.github.io/china-antique-maplibre/
 
 Anyone can open that link in a browser (needs internet for EOX satellite + Terrarium DEM tiles). No install required.
 
-### Production references · 河西四郡 (ep.07)
+### Production reference · 河西四郡 (ep.07)
 
-Real output from the author’s Hexi corridor series (map storytelling), used as the visual target for this stack:
+Map storytelling sample from the author’s Hexi series (antique map stack in a real episode). Low-res clip for in-README playback:
 
-| | |
-|--|--|
-| **Short clip** | [marketing/hexi-ep07/hexi-ep07-map-clip.mp4](marketing/hexi-ep07/hexi-ep07-map-clip.mp4) (~36s, compressed) |
-| **Cover** | ![cover](marketing/hexi-ep07/cover-hexi-four-commanderies.jpg) |
-| **Map stills** | [still-01](marketing/hexi-ep07/still-01-open.jpg) · [still-02](marketing/hexi-ep07/still-02-corridor.jpg) · [still-03](marketing/hexi-ep07/still-03-commanderies.jpg) · [still-04](marketing/hexi-ep07/still-04-route.jpg) · [still-05](marketing/hexi-ep07/still-05-close.jpg) |
-| **More** | [marketing/hexi-ep07/](marketing/hexi-ep07/) |
+https://github.com/hopechen067/china-antique-maplibre/raw/master/marketing/hexi-ep07/hexi-ep07-demo-480p.mp4
 
-Tuner-only screenshots (EOX demo):
+<video src="marketing/hexi-ep07/hexi-ep07-demo-480p.mp4" controls playsinline preload="metadata" width="720">
+  Your browser does not support HTML video.
+  <a href="marketing/hexi-ep07/hexi-ep07-demo-480p.mp4">Download demo clip (480p)</a>
+</video>
 
-- [marketing/preview-eox-china.png](marketing/preview-eox-china.png) — national view  
-- [marketing/preview-eox-hexi.png](marketing/preview-eox-hexi.png) — Hexi / Qinghai style zoom  
+- Longer clip (~36s): [hexi-ep07-map-clip.mp4](marketing/hexi-ep07/hexi-ep07-map-clip.mp4)  
+- Folder: [marketing/hexi-ep07/](marketing/hexi-ep07/)  
+- Live map tuner (not video): https://hopechen067.github.io/china-antique-maplibre/  
 
 | Item | Value |
 |------|--------|

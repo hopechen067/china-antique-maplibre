@@ -8,6 +8,7 @@ They are **not** stock photography; treat as project demos under the repo LICENS
 
 | File | Notes |
 |------|--------|
+| `hexi-ep07-demo-480p.mp4` | **README embed** — ~20s, 480p, muted, small file |
 | `hexi-ep07-map-clip.mp4` | ~36s web clip from the 1080p master (compressed; **not** the full episode) |
 | `still-*.jpg` | Frames pulled from the master (map + UI moments) |
 | `cover-hexi-four-commanderies.jpg` | Episode cover art |
