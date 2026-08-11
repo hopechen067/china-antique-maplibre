@@ -9,9 +9,25 @@
 **交互调参器：** https://hopechen067.github.io/china-antique-maplibre/  
 （EOX 卫星底图 + Terrarium 山影需联网。无需安装。）
 
+### 演示视频
+
+本栈在真实地图叙事片中的效果示例（**河西走廊 · 河西四郡**）。低分辨率短片，由 GitHub Pages 提供流式播放：
+
+https://hopechen067.github.io/china-antique-maplibre/media/hexi-ep07-demo-480p.mp4
+
+<video
+  controls
+  playsinline
+  preload="metadata"
+  width="720"
+  src="https://hopechen067.github.io/china-antique-maplibre/media/hexi-ep07-demo-480p.mp4">
+</video>
+
+更长片段（约 36 秒）：[showcases/hexi-ep07/hexi-ep07-map-clip.mp4](showcases/hexi-ep07/hexi-ep07-map-clip.mp4)
+
 ## 效果展示
 
-《河西走廊 · 河西四郡》(ep.07) 地图镜头静帧，以及调参器截图。
+同一开源演示的静帧，以及调参器截图。
 
 <table>
   <tr>

@@ -9,9 +9,25 @@ Open-source **antique parchment** MapLibre stack for China historical maps and s
 **Interactive tuner:** https://hopechen067.github.io/china-antique-maplibre/  
 (EOX satellite + Terrarium DEM need internet. No install.)
 
+### Demo video
+
+Example output of this stack in a real map-story episode (**河西走廊 · 河西四郡**). Low-res clip streamed from GitHub Pages:
+
+https://hopechen067.github.io/china-antique-maplibre/media/hexi-ep07-demo-480p.mp4
+
+<video
+  controls
+  playsinline
+  preload="metadata"
+  width="720"
+  src="https://hopechen067.github.io/china-antique-maplibre/media/hexi-ep07-demo-480p.mp4">
+</video>
+
+Longer clip (~36s): [showcases/hexi-ep07/hexi-ep07-map-clip.mp4](showcases/hexi-ep07/hexi-ep07-map-clip.mp4)
+
 ## Showcases
 
-Example frames from a **河西走廊 · 河西四郡 (ep.07)** map-storytelling project, plus live tuner captures.
+Still frames from the same open demo, plus live tuner captures.
 
 <table>
   <tr>
