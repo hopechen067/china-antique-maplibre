@@ -1,0 +1,35 @@
+# OS / editor
+.DS_Store
+Thumbs.db
+Desktop.ini
+*.swp
+*~
+.idea/
+.vscode/
+*.code-workspace
+
+# Local secrets / personal tile endpoints
+china-antique-maplibre/tuner/map-tiles.config.local.js
+**/*.local.js
+.env
+.env.*
+!.env.example
+
+# Logs & caches
+*.log
+npm-debug.log*
+.cache/
+node_modules/
+.python-version
+__pycache__/
+
+# Local marketing working copies (never re-add production source stills)
+marketing/_src_*/
+marketing/_src_*/
+
+# Optional large local water rebuilds
+*.geojson.bak
+water-data.full.js
+
+# Git / tooling noise
+*.stackdump

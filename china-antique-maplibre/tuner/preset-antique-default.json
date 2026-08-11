@@ -1,0 +1,64 @@
+{
+  "id": "antique-default",
+  "label": "Antique parchment default",
+  "version": 2,
+  "savedAt": "2026-07-20T12:28:00",
+  "camera": {
+    "center": [104.0, 35.5],
+    "zoom": 4.2,
+    "pitch": 28,
+    "bearing": 0
+  },
+  "maplibre": {
+    "backgroundColor": "#c8c2b4",
+    "terrainExaggeration": 1.6,
+    "satellite": {
+      "opacity": 0.7,
+      "saturation": -0.08,
+      "contrast": 0.02,
+      "brightnessMin": 0.08,
+      "brightnessMax": 0.96,
+      "hueRotate": 12
+    },
+    "hillshade": {
+      "exaggeration": 0.42,
+      "illuminationDirection": 315,
+      "shadowColor": "#2c2824",
+      "highlightColor": "#f0ece4",
+      "accentColor": "#6a6458"
+    },
+    "water": {
+      "lakeFill": "rgba(50,118,138,0.9)",
+      "lakeOutline": "rgba(90,110,105,0.8)",
+      "riverLevel3": "rgba(48,112,128,0.55)",
+      "riverLevel2": "rgba(45,110,125,0.88)",
+      "riverLevel1": "rgba(42,105,120,0.95)",
+      "highlightRiver": "rgba(38,100,118,1)",
+      "riverL3Width": 1.2,
+      "riverL2Width": 2,
+      "riverL1Width": 1.8,
+      "highlightWidth": 2.4
+    }
+  },
+  "css": {
+    "sepia": 0.08,
+    "saturate": 0.98,
+    "contrast": 1.03,
+    "brightness": 1.0,
+    "hueRotate": -1,
+    "warmTintAlpha": 0.04,
+    "warmTintColor": "#9a8868",
+    "vignetteStrength": 0.1
+  },
+  "ui": {
+    "showWater": true,
+    "showHighlight": true,
+    "showCities": true,
+    "showRef": false
+  },
+  "cities": {
+    "dataFile": "assets/sample-sites.json",
+    "halfKm": 18,
+    "renderMode": "fill-extrusion"
+  }
+}

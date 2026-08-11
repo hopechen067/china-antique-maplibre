@@ -1,0 +1,58 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://skills.local/china-antique-maplibre/schemas/sample-sites.schema.json",
+  "title": "HanCity3D sample sites",
+  "oneOf": [
+    {
+      "type": "array",
+      "items": { "$ref": "#/$defs/site" }
+    },
+    {
+      "type": "object",
+      "properties": {
+        "sites": {
+          "type": "array",
+          "items": { "$ref": "#/$defs/site" }
+        },
+        "cities": {
+          "type": "array",
+          "items": { "$ref": "#/$defs/site" }
+        }
+      },
+      "additionalProperties": true
+    }
+  ],
+  "$defs": {
+    "site": {
+      "type": "object",
+      "required": ["id", "name", "lng", "lat", "tier"],
+      "properties": {
+        "id": { "type": "string", "minLength": 1 },
+        "name": { "type": "string", "minLength": 1 },
+        "lng": { "type": "number", "minimum": -180, "maximum": 180 },
+        "lat": { "type": "number", "minimum": -90, "maximum": 90 },
+        "tier": {
+          "type": "string",
+          "enum": [
+            "capital",
+            "large",
+            "medium",
+            "small",
+            "pass",
+            "station",
+            "ordos"
+          ]
+        },
+        "modelType": {
+          "type": "string",
+          "enum": ["commandery", "pass", "station", "ordos"]
+        },
+        "halfKm": { "type": "number", "exclusiveMinimum": 0 },
+        "note": { "type": "string" },
+        "role": { "type": "string" },
+        "scale": { "type": "number" }
+      },
+      "additionalProperties": true
+    }
+  }
+}

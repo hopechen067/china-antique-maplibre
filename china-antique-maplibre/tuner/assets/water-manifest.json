@@ -1,0 +1,97 @@
+{
+  "id": "china-water-full-v1",
+  "note": "Full China water overlay for antique MapLibre demos and production. Level1=hyd1; level2=hyd2; level3=screen layer from source River4; lakes=China lakes WGS84; highlightSystems=keyword subsets for narrative emphasis.",
+  "highlightSystems": [
+    {
+      "id": "shiyang",
+      "label": "石羊河水系",
+      "keywords": [
+        "石羊",
+        "西营",
+        "黄羊",
+        "古浪",
+        "杂木",
+        "金塔河",
+        "东大河",
+        "西大河",
+        "大靖"
+      ]
+    },
+    {
+      "id": "heihe",
+      "label": "黑河水系",
+      "keywords": [
+        "黑河",
+        "弱水",
+        "额济",
+        "居延",
+        "梨园",
+        "山丹",
+        "北大河",
+        "托莱",
+        "讨赖",
+        "陶赖",
+        "洪水坝",
+        "泥河"
+      ]
+    },
+    {
+      "id": "shule",
+      "label": "疏勒河水系",
+      "keywords": [
+        "疏勒",
+        "昌马",
+        "党河",
+        "石油河",
+        "白杨河"
+      ]
+    },
+    {
+      "id": "qinghai_slope",
+      "label": "青海湖/黄河支流",
+      "keywords": [
+        "布哈",
+        "大通河",
+        "湟水",
+        "盐坎"
+      ]
+    }
+  ],
+  "counts": {
+    "riverLevel1": 840,
+    "riverLevel2": 2143,
+    "riverLevel3": 992,
+    "chinaLakes": 263,
+    "highlightWaterSystems": 104,
+    "highlightBySystem": {
+      "qinghai_slope": 41,
+      "heihe": 35,
+      "shule": 15,
+      "shiyang": 13
+    }
+  },
+  "sampleHighlightNames": [
+    "_牛河(莫泥河)",
+    "东大河",
+    "党河(大水河)",
+    "北大河(托莱河)",
+    "古浪河",
+    "大通河",
+    "小黄泥河",
+    "山丹河",
+    "布哈河(盐坎河)",
+    "杂木河",
+    "梨园河",
+    "泥河(小黑河)",
+    "湟水",
+    "疏勒河(昌马河)",
+    "白杨河",
+    "石油河",
+    "石羊河",
+    "西大河",
+    "西营河",
+    "金塔河",
+    "黄羊河",
+    "黑河(弱水、东河、西河)"
+  ]
+}

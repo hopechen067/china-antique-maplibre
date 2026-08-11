@@ -1,0 +1,42 @@
+[
+  {
+    "id": "demo-capital",
+    "name": "都城",
+    "lng": 108.9,
+    "lat": 34.3,
+    "tier": "capital",
+    "modelType": "commandery",
+    "halfKm": 30,
+    "note": "示例都城"
+  },
+  {
+    "id": "demo-commandery",
+    "name": "郡城",
+    "lng": 103.8,
+    "lat": 36.0,
+    "tier": "medium",
+    "modelType": "commandery",
+    "halfKm": 18,
+    "note": "示例郡城"
+  },
+  {
+    "id": "demo-pass",
+    "name": "关隘",
+    "lng": 110.5,
+    "lat": 34.5,
+    "tier": "pass",
+    "modelType": "pass",
+    "halfKm": 8,
+    "note": "示例关隘"
+  },
+  {
+    "id": "demo-station",
+    "name": "驿站",
+    "lng": 105.5,
+    "lat": 35.0,
+    "tier": "station",
+    "modelType": "station",
+    "halfKm": 4,
+    "note": "示例驿站"
+  }
+]
