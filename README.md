@@ -11,18 +11,21 @@ Anyone can open that link in a browser (needs internet for EOX satellite + Terra
 
 ### Production reference · 河西四郡 (ep.07)
 
-Map storytelling sample from the author’s Hexi series (antique map stack in a real episode). Low-res clip for in-README playback:
+Map storytelling sample from the author’s Hexi series.  
+**Do not use `raw.githubusercontent.com` for video** — GitHub serves those as downloads. This clip is hosted on **GitHub Pages** (`video/mp4`) so the player can stream it.
 
-https://github.com/hopechen067/china-antique-maplibre/raw/master/marketing/hexi-ep07/hexi-ep07-demo-480p.mp4
+https://hopechen067.github.io/china-antique-maplibre/media/hexi-ep07-demo-480p.mp4
 
-<video src="marketing/hexi-ep07/hexi-ep07-demo-480p.mp4" controls playsinline preload="metadata" width="720">
-  Your browser does not support HTML video.
-  <a href="marketing/hexi-ep07/hexi-ep07-demo-480p.mp4">Download demo clip (480p)</a>
+<video
+  controls
+  playsinline
+  preload="metadata"
+  width="720"
+  src="https://hopechen067.github.io/china-antique-maplibre/media/hexi-ep07-demo-480p.mp4">
 </video>
 
-- Longer clip (~36s): [hexi-ep07-map-clip.mp4](marketing/hexi-ep07/hexi-ep07-map-clip.mp4)  
-- Folder: [marketing/hexi-ep07/](marketing/hexi-ep07/)  
-- Live map tuner (not video): https://hopechen067.github.io/china-antique-maplibre/  
+- Longer clip (~36s, in-repo file): [hexi-ep07-map-clip.mp4](marketing/hexi-ep07/hexi-ep07-map-clip.mp4)  
+- Live **map** tuner: https://hopechen067.github.io/china-antique-maplibre/  
 
 | Item | Value |
 |------|--------|
