@@ -12,23 +12,50 @@ Open-source **antique parchment** MapLibre stack for China historical maps and s
 | Look | Antique CSS tuner + tiered settlement extrusions (`HanCity3D`) |
 | License | [MIT](LICENSE) for project code/docs, with data & marketing exceptions |
 
-## Quick start (tuner)
+## What you see on GitHub vs local
+
+| On GitHub | Local (your machine) |
+|-----------|----------------------|
+| Code, docs, and **static screenshots** under [`marketing/`](marketing/) | Live interactive **tuner** map |
+| No hosted map app yet (no GitHub Pages demo) | You start a small local HTTP server when you want to tune |
+
+**`http://localhost:8765` is not a public website.**  
+It only works **after you start a server on your own computer**. Clicking that address in the README without a local server → blank / connection error. That is expected.
+
+Preview of the live look (screenshots, no server required):
+
+- [marketing/preview-eox-china.png](marketing/preview-eox-china.png) — national view  
+- [marketing/preview-eox-hexi.png](marketing/preview-eox-hexi.png) — Hexi / Qinghai style zoom  
+
+## Quick start (tuner — local only)
+
+1. Clone this repo.  
+2. In a terminal, start **any** static file server in the tuner folder (pick one):
 
 ```bash
 cd china-antique-maplibre/tuner
+
+# Option A — Python 3
 python -m http.server 8765
+
+# Option B — Node (if python is missing)
+npx --yes serve -l 8765
+# or, if present in this folder after a local copy: node _serve.cjs
 ```
 
-Open [http://localhost:8765/](http://localhost:8765/).
+3. **Then** open in your browser: `http://127.0.0.1:8765/`  
+   (Same machine only. Stop the terminal process when you are done.)
 
-Serve over **HTTP** (or localhost). Opening `index.html` as `file://` breaks module/fetch of presets and water assets.
+Do **not** open `index.html` as `file://` — preset fetch and water assets will break.
+
+Basemap (EOX) and terrain (Terrarium) still need **internet** while the tuner is open.
 
 Optional asset check (requires Node on `PATH`):
 
 ```bash
+cd china-antique-maplibre/tuner
 node verify.mjs
 ```
-
 ## Features
 
 - **Configurable raster basemap** — default is [EOX Sentinel-2 cloudless](https://s2maps.eu) (MapLibre-style public demo; attribution + non-commercial public use). Override with `map-tiles.config.local.js` for licensed commercial imagery.
