@@ -587,31 +587,41 @@
       overflow-y: auto;
     }
 
+    /* Toggle sits on the right edge of #map-wrap (flush with the panel).
+       Do NOT use right: var(--panel-w) — toggle is inside map-wrap only, so
+       that offset incorrectly floats the button mid-map. */
     #panel-toggle {
       position: absolute;
-      right: var(--panel-w);
+      right: 0;
       top: 50%;
       transform: translateY(-50%);
       z-index: 25;
-      width: 22px;
-      height: 56px;
+      width: 28px;
+      height: 64px;
       border: 1px solid var(--border);
       border-right: none;
-      border-radius: 6px 0 0 6px;
+      border-radius: 8px 0 0 8px;
       background: var(--panel);
       color: var(--accent);
       cursor: pointer;
-      font-size: 12px;
+      font-size: 14px;
+      line-height: 1;
       display: flex;
       align-items: center;
       justify-content: center;
-      transition: right 0.2s ease;
+      box-shadow: -2px 0 10px rgba(0, 0, 0, 0.25);
+      transition: background 0.15s ease, color 0.15s ease;
+    }
+
+    #panel-toggle:hover {
+      background: var(--panel-2);
+      color: #f0c96a;
     }
 
     #panel-toggle.collapsed {
       right: 0;
       border-right: 1px solid var(--border);
-      border-radius: 6px 0 0 6px;
+      border-radius: 8px 0 0 8px;
     }
 
     #toast {
@@ -651,8 +661,10 @@
 
     @media (max-width: 800px) {
       #panel { width: min(360px, 92vw); position: absolute; right: 0; top: 0; bottom: 0; }
-      #panel-toggle { right: min(360px, 92vw); }
+      /* Still flush to map-wrap right edge (panel overlays map on small screens) */
+      #panel-toggle { right: 0; }
       #status-bar { max-width: calc(100% - 48px); }
+      #demo-banner { top: auto; bottom: 12px; }
     }
   </style>
 </head>
@@ -683,7 +695,7 @@
       </div>
 
       <div id="attribution-note">底图：按 map-tiles.config 配置 · 地形 DEM：Terrarium</div>
-      <button id="panel-toggle" title="收起/展开面板">›</button>
+      <button id="panel-toggle" type="button" title="收起/展开面板" aria-label="收起或展开右侧参数面板">›</button>
     </div>
 
     <aside id="panel">
