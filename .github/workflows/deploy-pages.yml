@@ -1,0 +1,60 @@
+# Deploy the MapLibre tuner as a static site on GitHub Pages.
+# Live URL: https://<owner>.github.io/<repo>/
+name: Deploy tuner (GitHub Pages)
+
+on:
+  push:
+    branches: [master, main]
+    paths:
+      - "china-antique-maplibre/tuner/**"
+      - ".github/workflows/deploy-pages.yml"
+  workflow_dispatch:
+
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+
+concurrency:
+  group: pages
+  cancel-in-progress: true
+
+jobs:
+  deploy:
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Prepare site root
+        run: |
+          set -euo pipefail
+          mkdir -p _site
+          # Publish only the tuner static assets (relative paths stay valid)
+          rsync -a \
+            --exclude '_serve.*' \
+            --exclude '_preview*' \
+            --exclude 'verify.mjs' \
+            --exclude 'map-tiles.config.local.js' \
+            --exclude '.DS_Store' \
+            china-antique-maplibre/tuner/ _site/
+          # Prevent Jekyll from ignoring underscore paths
+          touch _site/.nojekyll
+          # Small marker for debugging deploys
+          date -u +"%Y-%m-%dT%H:%M:%SZ" > _site/DEPLOYED_AT.txt
+          ls -la _site | head -40
+
+      - name: Configure Pages
+        uses: actions/configure-pages@v5
+
+      - name: Upload artifact
+        uses: actions/upload-pages-artifact@v3
+        with:
+          path: _site
+
+      - name: Deploy to GitHub Pages
+        id: deployment
+        uses: actions/deploy-pages@v4

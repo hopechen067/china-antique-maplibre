@@ -4,6 +4,7 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>古地图色调调参器 · MapLibre + Terrarium</title>
+  <meta name="description" content="China antique parchment MapLibre tuner — EOX Sentinel-2, Terrarium hillshade, water overlay. Live demo." />
   <link rel="stylesheet" href="https://unpkg.com/maplibre-gl@5.6.0/dist/maplibre-gl.css" />
   <script src="https://unpkg.com/maplibre-gl@5.6.0/dist/maplibre-gl.js"></script>
   <!-- Three.js r160 · 3D 城池 custom layer 依赖 -->
@@ -181,6 +182,38 @@
       display: none;
       margin-top: 4px;
       color: #e0a060;
+    }
+
+    #demo-banner {
+      position: absolute;
+      top: 10px;
+      left: 50%;
+      transform: translateX(-50%);
+      z-index: 20;
+      max-width: min(720px, calc(100% - 24px));
+      padding: 6px 14px;
+      border-radius: 999px;
+      font-size: 12px;
+      line-height: 1.35;
+      color: #f5e6c8;
+      background: rgba(28, 18, 10, 0.82);
+      border: 1px solid rgba(212, 168, 75, 0.45);
+      box-shadow: 0 4px 18px rgba(0, 0, 0, 0.35);
+      text-align: center;
+      pointer-events: auto;
+    }
+    #demo-banner a {
+      color: #f0c96a;
+      text-decoration: underline;
+      text-underline-offset: 2px;
+    }
+    #demo-banner button {
+      margin-left: 8px;
+      border: 0;
+      background: transparent;
+      color: rgba(245, 230, 200, 0.65);
+      cursor: pointer;
+      font-size: 12px;
     }
 
     /* 河流名称：无底无框，字号略小于城池，不抢视线 */
@@ -631,6 +664,12 @@
       </div>
       <div id="warm-tint"></div>
       <div id="vignette"></div>
+
+      <div id="demo-banner" role="note">
+        在线预览 · Online demo（底图/山影需联网）·
+        <a href="https://github.com/hopechen067/china-antique-maplibre" target="_blank" rel="noopener">GitHub</a>
+        <button type="button" id="demo-banner-close" title="关闭提示">✕</button>
+      </div>
 
       <div id="ref-compare" class="pip">
         <span class="ref-label" id="ref-label">参考图 · 手绘古地图</span>
@@ -2253,6 +2292,17 @@
         }
       );
     }
+
+    // Demo banner (online / local)
+    (function () {
+      var btn = document.getElementById('demo-banner-close');
+      var bar = document.getElementById('demo-banner');
+      if (btn && bar) {
+        btn.addEventListener('click', function () {
+          bar.style.display = 'none';
+        });
+      }
+    })();
 
     // ============================================================
     // 地图初始化（瓦片端点来自 map-tiles.config*.js，默认无商业卫星热链）

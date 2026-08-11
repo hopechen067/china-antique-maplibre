@@ -2,6 +2,18 @@
 
 Open-source **antique parchment** MapLibre stack for China historical maps and short-form video production (HyperFrames or any MapLibre host).
 
+## Live demo
+
+**Interactive tuner (GitHub Pages):**  
+https://hopechen067.github.io/china-antique-maplibre/
+
+Anyone can open that link in a browser (needs internet for EOX satellite + Terrarium DEM tiles). No install required.
+
+Static screenshots (if the live map is slow to load):
+
+- [marketing/preview-eox-china.png](marketing/preview-eox-china.png) — national view  
+- [marketing/preview-eox-hexi.png](marketing/preview-eox-hexi.png) — Hexi / Qinghai style zoom  
+
 | Item | Value |
 |------|--------|
 | Skill folder | `china-antique-maplibre` |
@@ -11,26 +23,11 @@ Open-source **antique parchment** MapLibre stack for China historical maps and s
 | Water | Full-China overlay in `tuner/assets/water-data.js` — **not MIT**; see [DATA-PROVENANCE.md](DATA-PROVENANCE.md) |
 | Look | Antique CSS tuner + tiered settlement extrusions (`HanCity3D`) |
 | License | [MIT](LICENSE) for project code/docs, with data & marketing exceptions |
+| Hosted demo | GitHub Pages → `china-antique-maplibre/tuner` (see `.github/workflows/deploy-pages.yml`) |
 
-## What you see on GitHub vs local
+## Quick start (local tuner)
 
-| On GitHub | Local (your machine) |
-|-----------|----------------------|
-| Code, docs, and **static screenshots** under [`marketing/`](marketing/) | Live interactive **tuner** map |
-| No hosted map app yet (no GitHub Pages demo) | You start a small local HTTP server when you want to tune |
-
-**`http://localhost:8765` is not a public website.**  
-It only works **after you start a server on your own computer**. Clicking that address in the README without a local server → blank / connection error. That is expected.
-
-Preview of the live look (screenshots, no server required):
-
-- [marketing/preview-eox-china.png](marketing/preview-eox-china.png) — national view  
-- [marketing/preview-eox-hexi.png](marketing/preview-eox-hexi.png) — Hexi / Qinghai style zoom  
-
-## Quick start (tuner — local only)
-
-1. Clone this repo.  
-2. In a terminal, start **any** static file server in the tuner folder (pick one):
+For offline-ish development or private tile configs, run the tuner on your machine:
 
 ```bash
 cd china-antique-maplibre/tuner
@@ -38,25 +35,21 @@ cd china-antique-maplibre/tuner
 # Option A — Python 3
 python -m http.server 8765
 
-# Option B — Node (if python is missing)
+# Option B — Node
 npx --yes serve -l 8765
-# or, if present in this folder after a local copy: node _serve.cjs
 ```
 
-3. **Then** open in your browser: `http://127.0.0.1:8765/`  
-   (Same machine only. Stop the terminal process when you are done.)
+Then open `http://127.0.0.1:8765/` **on the same computer** after the server starts.  
+(`localhost` is not the public demo — use the [Live demo](#live-demo) link above to share with others.)
 
 Do **not** open `index.html` as `file://` — preset fetch and water assets will break.
-
-Basemap (EOX) and terrain (Terrarium) still need **internet** while the tuner is open.
 
 Optional asset check (requires Node on `PATH`):
 
 ```bash
 cd china-antique-maplibre/tuner
 node verify.mjs
-```
-## Features
+```## Features
 
 - **Configurable raster basemap** — default is [EOX Sentinel-2 cloudless](https://s2maps.eu) (MapLibre-style public demo; attribution + non-commercial public use). Override with `map-tiles.config.local.js` for licensed commercial imagery.
 - **Terrarium hillshade + terrain** — `encoding: 'terrarium'` is mandatory.
