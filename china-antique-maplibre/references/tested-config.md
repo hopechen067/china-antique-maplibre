@@ -26,11 +26,11 @@ Wrong or missing `encoding` produces incorrect elevation and broken hillshade.
 - Type: `hillshade` layer on the Terrarium DEM source
 - Paint: `exaggeration`, `illumination-direction`, `shadow-color`, `highlight-color`, `accent-color` from preset
 
-### Water
+### Water (optional)
 
-- GeoJSON / in-memory FeatureCollections from `CHINA_WATER_DATA` (see [`water-overlay.md`](water-overlay.md))
+- GeoJSON / in-memory FeatureCollections from `CHINA_WATER_DATA` when you supply a local pack (see [`water-overlay.md`](water-overlay.md))
 - Layers: lakes fill/outline, river level 3 → 2 → 1, optional highlight systems
-- Data license is **not** MIT — see repository root `DATA-PROVENANCE.md`
+- **Not redistributed** in this repository — bring your own data under a license you control; see root `DATA-PROVENANCE.md`
 
 ## Layer order (bottom → top)
 

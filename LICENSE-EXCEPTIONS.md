@@ -7,21 +7,25 @@ same legal intent previously appended to that file.
 
 Also see [DATA-PROVENANCE.md](DATA-PROVENANCE.md) and [NOTICE.md](NOTICE.md).
 
-## 1. Geographic overlay data
+## 1. Geographic overlay data (not redistributed here)
 
-- `china-antique-maplibre/tuner/assets/water-data.js`
-- `china-antique-maplibre/tuner/assets/water-manifest.json`
+This repository **does not include** a bundled China water / hydrography pack.
+Do not assume any former or external `water-data.js` dump is MIT-licensed or
+cleared for redistribution via this project.
 
-See DATA-PROVENANCE.md. These files are provided for demo convenience.
-They are **NOT** licensed under MIT until upstream provenance is fully
-documented and cleared. Redistribute that data only if you independently
-hold the rights.
+If you add your own local `tuner/assets/water-data.js` (gitignored), that file
+remains under **your** data license — this project does not re-license it.
+See [DATA-PROVENANCE.md](DATA-PROVENANCE.md).
 
 ## 2. Showcase media under `showcases/`
 
 Screenshots and short clips for the project README. Unless a file states
 otherwise, treat them as All Rights Reserved demo media (viewing them in
 the repository is fine; do not assume a free stock / re-licensing grant).
+
+Showcase stills may depict maps that once included a water overlay in a
+private or prior build; that does **not** mean hydrography data is shipped
+or licensed from this repository.
 
 ## 3. Third-party services and libraries
 

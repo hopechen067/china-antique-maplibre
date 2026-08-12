@@ -9,7 +9,6 @@ const required = [
   'index.html',
   'map-tiles.config.js',
   'map-tiles.config.example.js',
-  'assets/water-data.js',
   'assets/han-city-3d.js',
   'assets/sample-sites.json',
   'preset-antique-default.json',
@@ -35,11 +34,12 @@ if (existsSync(localCfg)) {
   console.log('—   map-tiles.config.local.js (optional, not present)');
 }
 
+// Water pack is optional and not redistributed in this repo.
 const waterPath = join(root, 'assets/water-data.js');
 if (existsSync(waterPath)) {
   const bytes = statSync(waterPath).size;
-  console.log(`OK  assets/water-data.js size=${bytes}`);
-  if (bytes < 1_000_000) {
+  console.log(`OK  assets/water-data.js (optional local pack) size=${bytes}`);
+  if (bytes < 1_000) {
     console.error(`FAIL assets/water-data.js too small (${bytes} bytes)`);
     ok = false;
   } else {
@@ -60,22 +60,30 @@ if (existsSync(waterPath)) {
       ok = false;
     }
   }
+} else {
+  console.log('—   assets/water-data.js (optional, not shipped)');
 }
 
 const indexHtml = join(root, 'index.html');
 if (existsSync(indexHtml)) {
   const html = readFileSync(indexHtml, 'utf8');
   if (!html.includes('assets/water-data.js')) {
-    console.error('FAIL index.html does not reference assets/water-data.js');
+    console.error('FAIL index.html lost optional water loader path assets/water-data.js');
     ok = false;
   } else {
-    console.log('OK  index.html references assets/water-data.js');
+    console.log('OK  index.html keeps optional assets/water-data.js loader path');
   }
   if (!html.includes('ensureWaterData') || !html.includes('__TUNER_BASE__')) {
     console.error('FAIL index.html missing ensureWaterData / __TUNER_BASE__ loader');
     ok = false;
   } else {
     console.log('OK  index.html has ensureWaterData + __TUNER_BASE__');
+  }
+  if (!html.includes('not-shipped') && !html.includes('optional')) {
+    console.error('FAIL index.html should treat missing water as optional / not-shipped');
+    ok = false;
+  } else {
+    console.log('OK  index.html treats water as optional');
   }
   if (!html.includes('three@0.160.0')) {
     console.error('FAIL index.html missing Three.js script');

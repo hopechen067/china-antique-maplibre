@@ -51,20 +51,22 @@ jobs:
           touch _site/.nojekyll
           # Small marker for debugging deploys
           date -u +"%Y-%m-%dT%H:%M:%SZ" > _site/DEPLOYED_AT.txt
-          # Water overlay is required for the public demo (not MIT — see LICENSE-EXCEPTIONS.md)
-          if [ ! -f _site/assets/water-data.js ]; then
-            echo "::error::Missing _site/assets/water-data.js — demo water overlay would fail"
-            exit 1
-          fi
-          water_bytes=$(wc -c < _site/assets/water-data.js)
-          echo "water-data.js bytes=${water_bytes}"
-          if [ "${water_bytes}" -lt 1000000 ]; then
-            echo "::error::water-data.js looks truncated (${water_bytes} bytes)"
-            exit 1
-          fi
-          if ! grep -q 'CHINA_WATER_DATA' _site/assets/water-data.js; then
-            echo "::error::water-data.js does not define CHINA_WATER_DATA"
-            exit 1
+          # Water overlay is optional and not redistributed in this repo.
+          # If a local/user-supplied water-data.js is present in the publish tree,
+          # do a light sanity check; otherwise deploy the basemap/hillshade demo.
+          if [ -f _site/assets/water-data.js ]; then
+            water_bytes=$(wc -c < _site/assets/water-data.js)
+            echo "optional water-data.js bytes=${water_bytes}"
+            if [ "${water_bytes}" -lt 1000 ]; then
+              echo "::error::water-data.js looks empty/truncated (${water_bytes} bytes)"
+              exit 1
+            fi
+            if ! grep -q 'CHINA_WATER_DATA' _site/assets/water-data.js; then
+              echo "::error::water-data.js does not define CHINA_WATER_DATA"
+              exit 1
+            fi
+          else
+            echo "OK  no bundled water-data.js (optional overlay; see DATA-PROVENANCE.md)"
           fi
           ls -la _site _site/assets _site/media | head -60
 

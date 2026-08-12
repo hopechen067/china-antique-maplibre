@@ -70,9 +70,9 @@ https://hopechen067.github.io/china-antique-maplibre/media/hexi-ep07-demo-480p.m
 | 运行时 | [MapLibre GL JS](https://maplibre.org/) |
 | 默认底图 | **EOX Sentinel-2 cloudless**（公开演示 WMTS，请自行遵守图源条款） |
 | 地形 / 山影 | AWS Terrarium DEM（运行时拉取；必须 `encoding: 'terrarium'`） |
-| 水系 | `tuner/assets/water-data.js` — **不在 MIT 内**；见 [DATA-PROVENANCE.md](DATA-PROVENANCE.md) |
+| 水系 | **可选 / 不随仓库分发** — 自备本地 `water-data.js`；见 [DATA-PROVENANCE.md](DATA-PROVENANCE.md) |
 | 风格 | 古卷 CSS 调参 + 分级城池（`HanCity3D`） |
-| 许可证 | 代码/文档 [MIT](LICENSE)；水系与展示媒体见 [LICENSE-EXCEPTIONS.md](LICENSE-EXCEPTIONS.md) / [NOTICE.md](NOTICE.md) |
+| 许可证 | 代码/文档 [MIT](LICENSE)；展示媒体与第三方条款见 [LICENSE-EXCEPTIONS.md](LICENSE-EXCEPTIONS.md) / [NOTICE.md](NOTICE.md) |
 | 在线演示 | [在线演示](https://hopechen067.github.io/china-antique-maplibre/) — Pages 将 `china-antique-maplibre/tuner` 发布到站点根路径 |
 
 ## 快速拉取（安装）
@@ -169,7 +169,7 @@ node verify.mjs
 
 - **可配置栅格底图** — 默认 [EOX Sentinel-2 cloudless](https://s2maps.eu)；其他源用 gitignore 的 `map-tiles.config.local.js`。
 - **Terrarium 山影 + 地形** — 必须 `encoding: 'terrarium'`。
-- **全国水系叠加** — 多级河流、湖泊、高亮水系（见 DATA-PROVENANCE.md）。
+- **可选水系叠加** — 保留加载接口与调色 UI；水系原始数据**不**随仓库再分发（自备数据；见 DATA-PROVENANCE.md）。
 - **古卷 CSS 调参** — sepia / 暖调 / 暗角 / 画笔；导出 JSON 预设。
 - **城池分级** — 都城 / 大城 / 中城 / 小城 / 关隘 / 驿站 / 都护等。
 
@@ -188,7 +188,7 @@ EOX 公共瓦片多为非商用 + 需署名（约 10 m）。本项目不授予�
 ## 署名与合规
 
 - 遵守所用底图 / DEM / CDN 条款。
-- **水系数据：** 非 MIT — [DATA-PROVENANCE.md](DATA-PROVENANCE.md)、[LICENSE-EXCEPTIONS.md](LICENSE-EXCEPTIONS.md)。
+- **水系数据：** 本仓库不附带；你本地放入的数据包仍适用你自己的许可 — [DATA-PROVENANCE.md](DATA-PROVENANCE.md)、[LICENSE-EXCEPTIONS.md](LICENSE-EXCEPTIONS.md)。
 - **MapLibre / Three.js：** 再分发时遵循其许可证。
 - **展示图：** 默认保留权利的演示媒体（见 [LICENSE-EXCEPTIONS.md](LICENSE-EXCEPTIONS.md)）。
 
@@ -203,7 +203,7 @@ EOX 公共瓦片多为非商用 + 需署名（约 10 m）。本项目不授予�
 ```
 .
 ├── LICENSE
-├── LICENSE-EXCEPTIONS.md      # 水系 / 展示媒体 / 第三方（非 MIT）
+├── LICENSE-EXCEPTIONS.md      # 展示媒体 / 第三方 / 自备地理数据（非 MIT）
 ├── NOTICE.md
 ├── DATA-PROVENANCE.md
 ├── SECURITY.md

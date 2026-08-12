@@ -70,9 +70,9 @@ More files: [showcases/hexi-ep07/](showcases/hexi-ep07/)
 | Runtime | [MapLibre GL JS](https://maplibre.org/) |
 | Default basemap | **EOX Sentinel-2 cloudless** (public demo WMTS; check provider terms) |
 | Terrain / hillshade | AWS Terrarium DEM (runtime fetch; `encoding: 'terrarium'`) |
-| Water | China overlay in `tuner/assets/water-data.js` — **not MIT**; see [DATA-PROVENANCE.md](DATA-PROVENANCE.md) |
+| Water | **Optional / not shipped** — bring your own `water-data.js` locally; see [DATA-PROVENANCE.md](DATA-PROVENANCE.md) |
 | Look | Antique CSS tuner + tiered settlement extrusions (`HanCity3D`) |
-| License | [MIT](LICENSE) for code/docs; data & media exceptions in [LICENSE-EXCEPTIONS.md](LICENSE-EXCEPTIONS.md) / [NOTICE.md](NOTICE.md) |
+| License | [MIT](LICENSE) for code/docs; showcase media & third-party terms in [LICENSE-EXCEPTIONS.md](LICENSE-EXCEPTIONS.md) / [NOTICE.md](NOTICE.md) |
 | Hosted demo | [Live demo](https://hopechen067.github.io/china-antique-maplibre/) — Pages publishes `china-antique-maplibre/tuner` to the site root |
 
 ## Quick pull (install)
@@ -156,7 +156,7 @@ npx --yes serve -l 8765
 Then open `http://127.0.0.1:8765/` on the **same machine**.  
 Public share link: [Live demo](#live-demo).
 
-Do **not** open `index.html` as `file://` — presets and water assets will fail.
+Do **not** open `index.html` as `file://` — presets and optional local assets will fail.
 
 Optional check (Node on `PATH`):
 
@@ -169,7 +169,7 @@ node verify.mjs
 
 - **Configurable raster basemap** — default [EOX Sentinel-2 cloudless](https://s2maps.eu). Override with `map-tiles.config.local.js` (gitignored) for any tile URL you are allowed to use.
 - **Terrarium hillshade + terrain** — `encoding: 'terrarium'` is required.
-- **China water overlay** — river levels + lakes + highlight systems (see DATA-PROVENANCE.md).
+- **Optional water overlay** — loader + paint UI kept; hydrography data is **not** redistributed (bring your own; see DATA-PROVENANCE.md).
 - **Antique CSS tuner** — sepia / warm tint / vignette / paint; export JSON presets.
 - **City tiers** — capital / large / medium / small / pass / station / ordos via `HanCity3D`.
 
@@ -188,7 +188,7 @@ Satellite and DEM tiles are fetched at runtime from configured URLs only.
 ## Attribution & compliance
 
 - Follow each basemap / DEM / CDN provider’s terms for your use case.
-- **Water data:** not under MIT — [DATA-PROVENANCE.md](DATA-PROVENANCE.md), [LICENSE-EXCEPTIONS.md](LICENSE-EXCEPTIONS.md).
+- **Water data:** not shipped in this repo; any local pack you add stays under your license — [DATA-PROVENANCE.md](DATA-PROVENANCE.md), [LICENSE-EXCEPTIONS.md](LICENSE-EXCEPTIONS.md).
 - **MapLibre / Three.js:** keep their licenses when redistributing builds.
 - **Showcase images:** All Rights Reserved demo media unless noted otherwise ([LICENSE-EXCEPTIONS.md](LICENSE-EXCEPTIONS.md)).
 
@@ -203,7 +203,7 @@ Satellite and DEM tiles are fetched at runtime from configured URLs only.
 ```
 .
 ├── LICENSE
-├── LICENSE-EXCEPTIONS.md      # data / showcase / third-party (not MIT)
+├── LICENSE-EXCEPTIONS.md      # showcase / third-party / user geodata (not MIT)
 ├── NOTICE.md
 ├── DATA-PROVENANCE.md
 ├── SECURITY.md
