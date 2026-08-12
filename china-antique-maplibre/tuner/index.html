@@ -691,7 +691,7 @@
       <div id="status-bar">
         <div><strong>预设</strong> <span id="st-preset">antique-default</span></div>
         <div><strong>CSS</strong> <code id="st-css">—</code></div>
-        <div id="water-warn">⚠ 未加载水系数据 CHINA_WATER_DATA，水系层已跳过</div>
+        <div id="water-warn"></div>
       </div>
 
       <div id="attribution-note">底图：按 map-tiles.config 配置 · 地形 DEM：Terrarium</div>
@@ -991,8 +991,10 @@
 
   <div id="toast"></div>
 
-  <!-- 水系数据（体积较大，需先于地图初始化加载） -->
-  <script src="assets/water-data.js"></script>
+  <!-- 水系数据（~7MB；blocking 优先，boot() 内还有 fetch 回退） -->
+  <script
+    src="assets/water-data.js"
+    onerror="window.__WATER_DATA_SCRIPT_ERROR='assets/water-data.js'"></script>
   <script>
   (function () {
     'use strict';
@@ -2424,13 +2426,92 @@
       return { version: 8, sources: sources, layers: layers };
     }
 
-    function initMap() {
-      waterAvailable =
+    function isWaterDataReady() {
+      return (
         typeof window.CHINA_WATER_DATA === 'object' &&
-        window.CHINA_WATER_DATA !== null;
+        window.CHINA_WATER_DATA !== null
+      );
+    }
+
+    function setWaterWarn(message) {
+      const el = document.getElementById('water-warn');
+      if (!el) return;
+      if (!message) {
+        el.textContent = '';
+        el.style.display = 'none';
+        return;
+      }
+      el.textContent = message;
+      el.style.display = 'block';
+    }
+
+    /**
+     * Prefer the blocking <script src="assets/water-data.js"> tag.
+     * If it failed (network / wrong base path / truncated deploy), retry via fetch
+     * against a URL resolved from the current page location (Pages site root).
+     */
+    async function ensureWaterData() {
+      if (isWaterDataReady()) {
+        return { ok: true, via: 'script' };
+      }
+
+      const url = new URL('assets/water-data.js', window.location.href).href;
+      try {
+        const res = await fetch(url, { cache: 'force-cache' });
+        if (!res.ok) {
+          return {
+            ok: false,
+            reason: 'http',
+            detail: res.status + ' ' + url,
+          };
+        }
+        const code = await res.text();
+        if (!code || code.indexOf('CHINA_WATER_DATA') === -1) {
+          return {
+            ok: false,
+            reason: 'empty',
+            detail: url + ' (no CHINA_WATER_DATA assignment)',
+          };
+        }
+        // File body is `window.CHINA_WATER_DATA = {...};`
+        (0, eval)(code);
+        if (!isWaterDataReady()) {
+          return { ok: false, reason: 'parse', detail: url };
+        }
+        return { ok: true, via: 'fetch' };
+      } catch (e) {
+        return {
+          ok: false,
+          reason: 'network',
+          detail: String((e && e.message) || e),
+        };
+      }
+    }
+
+    function waterFailMessage(result) {
+      const scriptErr = window.__WATER_DATA_SCRIPT_ERROR;
+      if (result && result.reason === 'http') {
+        return (
+          '⚠ 水系数据未找到（' +
+          result.detail +
+          '）。若本地打开请用 HTTP 静态服务运行 tuner/；公开演示应提供 assets/water-data.js。'
+        );
+      }
+      if (scriptErr || (result && (result.reason === 'network' || result.reason === 'empty'))) {
+        return (
+          '⚠ 水系数据下载失败（约 7MB，需联网）。请刷新重试；水系层已暂时跳过。'
+        );
+      }
+      return '⚠ 水系数据不可用，水系层已跳过（不影响底图 / 山影调参）。';
+    }
+
+    function initMap() {
+      waterAvailable = isWaterDataReady();
 
       if (!waterAvailable) {
-        document.getElementById('water-warn').style.display = 'block';
+        setWaterWarn(waterFailMessage(window.__WATER_DATA_LOAD_RESULT));
+      } else {
+        setWaterWarn('');
       }
 
       const tileCfg = resolveTileConfig();
@@ -2837,6 +2918,14 @@
           // file:// 或离线时忽略，使用内嵌 DEFAULT_PARAMS
           console.info('未加载外部 preset 文件，使用内嵌默认值');
         }
+      }
+
+      const waterResult = await ensureWaterData();
+      window.__WATER_DATA_LOAD_RESULT = waterResult;
+      if (!waterResult.ok) {
+        console.warn('[tuner] water overlay unavailable', waterResult);
+      } else if (waterResult.via === 'fetch') {
+        console.info('[tuner] CHINA_WATER_DATA loaded via fetch fallback');
       }
 
       bindControls();

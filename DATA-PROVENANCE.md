@@ -19,7 +19,7 @@ Internal processing labels (not a legal source citation):
 
 ### License status
 
-**Not under the repository MIT license.**  
+**Not under the repository MIT license** (see [LICENSE-EXCEPTIONS.md](LICENSE-EXCEPTIONS.md)).  
 Upstream dataset name, version, download URL, and redistributable license are **not fully recorded** in this repository. Until that chain is documented and cleared:
 
 - Treat the overlay as **demo convenience data**, not open data under MIT.
