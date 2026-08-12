@@ -6,8 +6,8 @@
 
 ## 在线演示
 
-**交互调参器：** https://hopechen067.github.io/china-antique-maplibre/  
-（EOX 卫星底图 + Terrarium 山影需联网。无需安装。）
+**→ https://hopechen067.github.io/china-antique-maplibre/**  
+交互调参器（EOX 卫星底图 + Terrarium 山影需联网。无需安装。）
 
 ### 演示视频
 
@@ -72,8 +72,8 @@ https://hopechen067.github.io/china-antique-maplibre/media/hexi-ep07-demo-480p.m
 | 地形 / 山影 | AWS Terrarium DEM（运行时拉取；必须 `encoding: 'terrarium'`） |
 | 水系 | `tuner/assets/water-data.js` — **不在 MIT 内**；见 [DATA-PROVENANCE.md](DATA-PROVENANCE.md) |
 | 风格 | 古卷 CSS 调参 + 分级城池（`HanCity3D`） |
-| 许可证 | 代码/文档 [MIT](LICENSE)；水系与展示媒体见 LICENSE 例外 |
-| 在线演示 | GitHub Pages → `china-antique-maplibre/tuner` |
+| 许可证 | 代码/文档 [MIT](LICENSE)；水系与展示媒体见 [LICENSE-EXCEPTIONS.md](LICENSE-EXCEPTIONS.md) / [NOTICE.md](NOTICE.md) |
+| 在线演示 | [在线演示](https://hopechen067.github.io/china-antique-maplibre/) — Pages 将 `china-antique-maplibre/tuner` 发布到站点根路径 |
 
 ## 快速拉取（安装）
 
@@ -188,9 +188,9 @@ EOX 公共瓦片多为非商用 + 需署名（约 10 m）。本项目不授予�
 ## 署名与合规
 
 - 遵守所用底图 / DEM / CDN 条款。
-- **水系数据：** 非 MIT — [DATA-PROVENANCE.md](DATA-PROVENANCE.md)。
+- **水系数据：** 非 MIT — [DATA-PROVENANCE.md](DATA-PROVENANCE.md)、[LICENSE-EXCEPTIONS.md](LICENSE-EXCEPTIONS.md)。
 - **MapLibre / Three.js：** 再分发时遵循其许可证。
-- **展示图：** 默认保留权利的演示媒体（见 LICENSE 例外）。
+- **展示图：** 默认保留权利的演示媒体（见 [LICENSE-EXCEPTIONS.md](LICENSE-EXCEPTIONS.md)）。
 
 ## 安装为 Agent Skill
 
@@ -203,6 +203,7 @@ EOX 公共瓦片多为非商用 + 需署名（约 10 m）。本项目不授予�
 ```
 .
 ├── LICENSE
+├── LICENSE-EXCEPTIONS.md      # 水系 / 展示媒体 / 第三方（非 MIT）
 ├── NOTICE.md
 ├── DATA-PROVENANCE.md
 ├── SECURITY.md
@@ -213,7 +214,7 @@ EOX 公共瓦片多为非商用 + 需署名（约 10 m）。本项目不授予�
     ├── agents/openai.yaml
     ├── references/
     ├── schemas/
-    └── tuner/
+    └── tuner/                 # 发布到 GitHub Pages 站点根路径
 ```
 
 ## 贡献 / 安全

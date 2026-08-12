@@ -6,8 +6,8 @@ Open-source **antique parchment** MapLibre stack for China historical maps and s
 
 ## Live demo
 
-**Interactive tuner:** https://hopechen067.github.io/china-antique-maplibre/  
-(EOX satellite + Terrarium DEM need internet. No install.)
+**→ https://hopechen067.github.io/china-antique-maplibre/**  
+Interactive tuner (EOX satellite + Terrarium DEM need internet. No install.)
 
 ### Demo video
 
@@ -72,8 +72,8 @@ More files: [showcases/hexi-ep07/](showcases/hexi-ep07/)
 | Terrain / hillshade | AWS Terrarium DEM (runtime fetch; `encoding: 'terrarium'`) |
 | Water | China overlay in `tuner/assets/water-data.js` — **not MIT**; see [DATA-PROVENANCE.md](DATA-PROVENANCE.md) |
 | Look | Antique CSS tuner + tiered settlement extrusions (`HanCity3D`) |
-| License | [MIT](LICENSE) for code/docs, with data & showcase media exceptions |
-| Hosted demo | GitHub Pages → `china-antique-maplibre/tuner` |
+| License | [MIT](LICENSE) for code/docs; data & media exceptions in [LICENSE-EXCEPTIONS.md](LICENSE-EXCEPTIONS.md) / [NOTICE.md](NOTICE.md) |
+| Hosted demo | [Live demo](https://hopechen067.github.io/china-antique-maplibre/) — Pages publishes `china-antique-maplibre/tuner` to the site root |
 
 ## Quick pull (install)
 
@@ -188,9 +188,9 @@ Satellite and DEM tiles are fetched at runtime from configured URLs only.
 ## Attribution & compliance
 
 - Follow each basemap / DEM / CDN provider’s terms for your use case.
-- **Water data:** not under MIT — [DATA-PROVENANCE.md](DATA-PROVENANCE.md).
+- **Water data:** not under MIT — [DATA-PROVENANCE.md](DATA-PROVENANCE.md), [LICENSE-EXCEPTIONS.md](LICENSE-EXCEPTIONS.md).
 - **MapLibre / Three.js:** keep their licenses when redistributing builds.
-- **Showcase images:** All Rights Reserved demo media unless noted otherwise (LICENSE exceptions).
+- **Showcase images:** All Rights Reserved demo media unless noted otherwise ([LICENSE-EXCEPTIONS.md](LICENSE-EXCEPTIONS.md)).
 
 ## Install as an agent skill
 
@@ -203,6 +203,7 @@ Satellite and DEM tiles are fetched at runtime from configured URLs only.
 ```
 .
 ├── LICENSE
+├── LICENSE-EXCEPTIONS.md      # data / showcase / third-party (not MIT)
 ├── NOTICE.md
 ├── DATA-PROVENANCE.md
 ├── SECURITY.md
@@ -213,7 +214,7 @@ Satellite and DEM tiles are fetched at runtime from configured URLs only.
     ├── agents/openai.yaml
     ├── references/
     ├── schemas/
-    └── tuner/
+    └── tuner/                 # published to GitHub Pages site root
 ```
 
 ## Contributing / security
