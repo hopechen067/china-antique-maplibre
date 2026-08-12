@@ -36,7 +36,7 @@ Optional local `assets/water-data.js` is validated only if present.
 
 - Preset: `preset-antique-default.json` (copy: `presets/antique-default.json`)
 - Sites: `assets/sample-sites.json`
-- Water: **not shipped**. Optional local `assets/water-data.js` (gitignored) — see root `DATA-PROVENANCE.md` / `references/water-overlay.md`
+- Water: **not shipped**. Flag file `assets/water-pack.json` (`enabled: false`). Optional local `assets/water-data.js` (gitignored) — see root `DATA-PROVENANCE.md` / `references/water-overlay.md`
 - Public demo: GitHub Pages publishes this `tuner/` folder to the site root (`assets/…` paths stay relative)
 
 Export JSON, then migrate into HyperFrames. Do not host final renders on this page.

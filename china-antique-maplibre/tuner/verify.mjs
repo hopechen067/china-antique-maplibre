@@ -11,6 +11,7 @@ const required = [
   'map-tiles.config.example.js',
   'assets/han-city-3d.js',
   'assets/sample-sites.json',
+  'assets/water-pack.json',
   'preset-antique-default.json',
   'presets/antique-default.json',
 ];
@@ -34,7 +35,24 @@ if (existsSync(localCfg)) {
   console.log('—   map-tiles.config.local.js (optional, not present)');
 }
 
-// Water pack is optional and not redistributed in this repo.
+// Tiny pack flag must default to disabled (no in-repo redistribution).
+const waterPackPath = join(root, 'assets/water-pack.json');
+if (existsSync(waterPackPath)) {
+  try {
+    const pack = JSON.parse(readFileSync(waterPackPath, 'utf8'));
+    if (pack.enabled === true) {
+      console.error('FAIL assets/water-pack.json enabled=true but public tree must default to false');
+      ok = false;
+    } else {
+      console.log('OK  assets/water-pack.json enabled=false (water not shipped)');
+    }
+  } catch (e) {
+    console.error('FAIL parsing assets/water-pack.json', e);
+    ok = false;
+  }
+}
+
+// Large water pack is optional and not redistributed in this repo.
 const waterPath = join(root, 'assets/water-data.js');
 if (existsSync(waterPath)) {
   const bytes = statSync(waterPath).size;
@@ -67,11 +85,11 @@ if (existsSync(waterPath)) {
 const indexHtml = join(root, 'index.html');
 if (existsSync(indexHtml)) {
   const html = readFileSync(indexHtml, 'utf8');
-  if (!html.includes('assets/water-data.js')) {
-    console.error('FAIL index.html lost optional water loader path assets/water-data.js');
+  if (!html.includes('water-pack.json') || !html.includes('assets/water-data.js')) {
+    console.error('FAIL index.html lost water-pack.json / assets/water-data.js loader path');
     ok = false;
   } else {
-    console.log('OK  index.html keeps optional assets/water-data.js loader path');
+    console.log('OK  index.html keeps water-pack.json + optional water-data.js loader');
   }
   if (!html.includes('ensureWaterData') || !html.includes('__TUNER_BASE__')) {
     console.error('FAIL index.html missing ensureWaterData / __TUNER_BASE__ loader');

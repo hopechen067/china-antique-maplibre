@@ -70,7 +70,7 @@ https://hopechen067.github.io/china-antique-maplibre/media/hexi-ep07-demo-480p.m
 | 运行时 | [MapLibre GL JS](https://maplibre.org/) |
 | 默认底图 | **EOX Sentinel-2 cloudless**（公开演示 WMTS，请自行遵守图源条款） |
 | 地形 / 山影 | AWS Terrarium DEM（运行时拉取；必须 `encoding: 'terrarium'`） |
-| 水系 | **可选 / 不随仓库分发** — 自备本地 `water-data.js`；见 [DATA-PROVENANCE.md](DATA-PROVENANCE.md) |
+| 水系 | **可选 / 不随仓库分发** — 本地 `water-data.js` + `water-pack.json` 的 `enabled:true`；见 [DATA-PROVENANCE.md](DATA-PROVENANCE.md) |
 | 风格 | 古卷 CSS 调参 + 分级城池（`HanCity3D`） |
 | 许可证 | 代码/文档 [MIT](LICENSE)；展示媒体与第三方条款见 [LICENSE-EXCEPTIONS.md](LICENSE-EXCEPTIONS.md) / [NOTICE.md](NOTICE.md) |
 | 在线演示 | [在线演示](https://hopechen067.github.io/china-antique-maplibre/) — Pages 将 `china-antique-maplibre/tuner` 发布到站点根路径 |

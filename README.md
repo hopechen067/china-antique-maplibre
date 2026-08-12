@@ -70,7 +70,7 @@ More files: [showcases/hexi-ep07/](showcases/hexi-ep07/)
 | Runtime | [MapLibre GL JS](https://maplibre.org/) |
 | Default basemap | **EOX Sentinel-2 cloudless** (public demo WMTS; check provider terms) |
 | Terrain / hillshade | AWS Terrarium DEM (runtime fetch; `encoding: 'terrarium'`) |
-| Water | **Optional / not shipped** — bring your own `water-data.js` locally; see [DATA-PROVENANCE.md](DATA-PROVENANCE.md) |
+| Water | **Optional / not shipped** — local `water-data.js` + `water-pack.json` `enabled:true`; see [DATA-PROVENANCE.md](DATA-PROVENANCE.md) |
 | Look | Antique CSS tuner + tiered settlement extrusions (`HanCity3D`) |
 | License | [MIT](LICENSE) for code/docs; showcase media & third-party terms in [LICENSE-EXCEPTIONS.md](LICENSE-EXCEPTIONS.md) / [NOTICE.md](NOTICE.md) |
 | Hosted demo | [Live demo](https://hopechen067.github.io/china-antique-maplibre/) — Pages publishes `china-antique-maplibre/tuner` to the site root |

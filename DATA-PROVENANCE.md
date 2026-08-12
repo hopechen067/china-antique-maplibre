@@ -6,10 +6,9 @@ This repository **does not ship** a China water / hydrography GeoJSON pack.
 
 | Path | Role |
 |------|------|
-| `china-antique-maplibre/tuner/assets/water-data.js` | **Optional, local only** — if you place a file here that assigns `window.CHINA_WATER_DATA`, the tuner loads it |
-| `china-antique-maplibre/tuner/assets/water-manifest.json` | Optional local metadata for your own pack (not required by the loader) |
-
-Both paths are listed in `.gitignore` so a local pack is not committed by accident.
+| `china-antique-maplibre/tuner/assets/water-pack.json` | Shipped tiny flag (`enabled: false` by default). Set `enabled: true` only when you have a local pack |
+| `china-antique-maplibre/tuner/assets/water-data.js` | **Optional, local only** — assigns `window.CHINA_WATER_DATA` (gitignored) |
+| `china-antique-maplibre/tuner/assets/water-manifest.json` | Optional local metadata for your own pack (gitignored; not required by the loader) |
 
 ### Why nothing is bundled
 
@@ -29,7 +28,7 @@ Export as:
 window.CHINA_WATER_DATA = { /* FeatureCollections */ };
 ```
 
-in `tuner/assets/water-data.js`, serve the tuner over HTTP, and refresh. The loading UI and MapLibre layer wiring stay in place; without a local file the demo runs basemap + hillshade + CSS only.
+in `tuner/assets/water-data.js`, set `enabled: true` in `tuner/assets/water-pack.json`, serve the tuner over HTTP, and refresh. The loading UI and MapLibre layer wiring stay in place; with the default `enabled: false` the demo runs basemap + hillshade + CSS only and does not request the large pack.
 
 Suggested open replacements (you must clear licensing yourself): self-derived OSM extracts, Natural Earth where applicable, or other hydrography you are allowed to use.
 

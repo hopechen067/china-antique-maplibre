@@ -6,15 +6,17 @@ Optional MapLibre water layers. Hydrography data is **not redistributed** in thi
 
 ## Data object (user-supplied)
 
-Place a local file at `tuner/assets/water-data.js` (gitignored) that assigns:
+1. Place a local file at `tuner/assets/water-data.js` (gitignored) that assigns:
 
 ```js
 window.CHINA_WATER_DATA = { /* FeatureCollections */ };
 ```
 
+2. Set `"enabled": true` in the shipped `tuner/assets/water-pack.json` (default is `false` so the demo never fetches a missing large pack).
+
 Optional local metadata file: `tuner/assets/water-manifest.json` (also gitignored; not required by the loader).
 
-Without those files the demo boots normally: basemap + Terrarium hillshade + antique CSS; water toggles simply have no layers.
+With the default pack flag the demo boots normally: basemap + Terrarium hillshade + antique CSS; water toggles simply have no layers.
 
 ### Layers (FeatureCollections)
 
@@ -72,5 +74,6 @@ Tune live in the tuner when a local pack is present; export JSON for HyperFrames
 
 1. Produce GeoJSON FeatureCollections matching the keys above (use data you may license).
 2. Export as `window.CHINA_WATER_DATA = { ... }` in `tuner/assets/water-data.js`.
-3. Serve `tuner/` over HTTP and refresh — `ensureWaterData()` loads the file if present.
-4. Run `node verify.mjs` (passes with or without the optional pack; validates it if present).
+3. Set `enabled: true` in `tuner/assets/water-pack.json`.
+4. Serve `tuner/` over HTTP and refresh — `ensureWaterData()` loads the file when enabled.
+5. Run `node verify.mjs` (public default keeps `enabled: false`; validates a local `water-data.js` if present).

@@ -838,7 +838,7 @@
         <details class="group" open>
           <summary>水系（可选 · 一/二/三级 + 湖 + 高亮）</summary>
           <div class="group-body">
-            <p class="hint">水系数据不随仓库分发。若需叠加，将自有 <code>assets/water-data.js</code>（定义 <code>window.CHINA_WATER_DATA</code>）放到本目录后刷新。接口见 <code>references/water-overlay.md</code>。</p>
+            <p class="hint">水系数据不随仓库分发。若需叠加：① 放入自有 <code>assets/water-data.js</code>（定义 <code>window.CHINA_WATER_DATA</code>）；② 将 <code>assets/water-pack.json</code> 的 <code>enabled</code> 设为 <code>true</code>；③ 刷新。接口见 <code>references/water-overlay.md</code>。</p>
             <div class="ctrl" data-key="water.lakeFill" data-type="rgba">
               <label>湖泊填充 lake-fill</label>
               <div class="rgba-row">
@@ -2477,16 +2477,36 @@
 
     /**
      * Optional water overlay before initMap (no race).
-     * Probe with fetch first — missing assets/water-data.js is expected
-     * (not shipped); do not inject <script> for a hard 404.
-     * URL uses __TUNER_BASE__ so Pages project paths stay correct.
+     * Default: read tiny assets/water-pack.json (enabled:false) and skip
+     * fetching the large pack — no expected 404 on water-data.js.
+     * When enabled:true, load src (absolute via __TUNER_BASE__).
      */
     async function ensureWaterData() {
       if (isWaterDataReady()) {
         return { ok: true, via: 'preexisting' };
       }
 
-      const url = tunerAssetUrl('assets/water-data.js');
+      var packUrl = tunerAssetUrl('assets/water-pack.json');
+      var pack = { enabled: false, src: 'assets/water-data.js' };
+      try {
+        var packRes = await fetch(packUrl, { cache: 'default' });
+        if (packRes.ok) {
+          pack = Object.assign(pack, await packRes.json());
+        }
+      } catch (e) {
+        // Keep defaults; treat as not shipped.
+      }
+
+      if (!pack.enabled) {
+        return {
+          ok: false,
+          reason: 'not-shipped',
+          detail: 'water-pack.json enabled=false',
+          url: packUrl,
+        };
+      }
+
+      const url = tunerAssetUrl(pack.src || 'assets/water-data.js');
 
       var res;
       try {
@@ -2546,13 +2566,13 @@
     function waterOptionalMessage(result) {
       if (!result || result.ok) return '';
       if (result.reason === 'not-shipped' || result.reason === 'optional-absent') {
-        return '水系层可选 · 本仓库未附带水系数据。可将自有 water-data.js 放到 assets/ 后刷新。';
+        return '水系层可选 · 本仓库未附带水系数据。启用：本地 water-data.js + water-pack.json enabled=true。';
       }
       if (result.reason === 'empty' || result.reason === 'parse') {
         return '水系文件无法解析（需定义 window.CHINA_WATER_DATA）。底图 / 山影调参不受影响。';
       }
       if (result.reason === 'http') {
-        return '水系层可选 · 未能读取 assets/water-data.js（不影响底图 / 山影调参）。';
+        return '水系层可选 · 未能读取水系文件（不影响底图 / 山影调参）。';
       }
       return '水系层可选 · 当前未启用（不影响底图 / 山影调参）。';
     }
@@ -2618,6 +2638,7 @@
         }
         try {
           if (waterAvailable) addWaterLayers();
+          else updateWaterStats();
         } catch (e) {
           console.warn('水系图层添加失败', e);
         }
@@ -2670,7 +2691,7 @@
       if (!d) {
         el.textContent =
           '水系层可选 · 本仓库未附带水系数据。\n' +
-          '将自有 assets/water-data.js（window.CHINA_WATER_DATA）放到 tuner 后刷新即可启用。';
+          '启用：放入 assets/water-data.js（window.CHINA_WATER_DATA），并将 water-pack.json 的 enabled 设为 true 后刷新。';
         return;
       }
       function n(fc) { return fc && fc.features ? fc.features.length : 0; }
