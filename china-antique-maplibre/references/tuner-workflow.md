@@ -11,7 +11,7 @@ python -m http.server 8765
 
 Open `http://localhost:8765/`.
 
-Do **not** open `index.html` via `file://` — preset fetch, water assets, and site JSON will fail.
+Do **not** open `index.html` via `file://` — preset fetch and site JSON will fail. Optional local water packs also need HTTP.
 
 ### Tiles
 
@@ -25,7 +25,7 @@ Optional smoke check:
 node verify.mjs
 ```
 
-Exit `0` if required assets exist; `1` otherwise.
+Exit `0` if required assets exist; `1` otherwise. Missing `assets/water-data.js` is OK (optional / not shipped).
 
 ## Load default preset
 

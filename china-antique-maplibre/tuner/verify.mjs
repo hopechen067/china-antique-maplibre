@@ -9,9 +9,9 @@ const required = [
   'index.html',
   'map-tiles.config.js',
   'map-tiles.config.example.js',
-  'assets/water-data.js',
   'assets/han-city-3d.js',
   'assets/sample-sites.json',
+  'assets/water-pack.json',
   'preset-antique-default.json',
   'presets/antique-default.json',
 ];
@@ -35,11 +35,29 @@ if (existsSync(localCfg)) {
   console.log('—   map-tiles.config.local.js (optional, not present)');
 }
 
+// Tiny pack flag must default to disabled (no in-repo redistribution).
+const waterPackPath = join(root, 'assets/water-pack.json');
+if (existsSync(waterPackPath)) {
+  try {
+    const pack = JSON.parse(readFileSync(waterPackPath, 'utf8'));
+    if (pack.enabled === true) {
+      console.error('FAIL assets/water-pack.json enabled=true but public tree must default to false');
+      ok = false;
+    } else {
+      console.log('OK  assets/water-pack.json enabled=false (water not shipped)');
+    }
+  } catch (e) {
+    console.error('FAIL parsing assets/water-pack.json', e);
+    ok = false;
+  }
+}
+
+// Large water pack is optional and not redistributed in this repo.
 const waterPath = join(root, 'assets/water-data.js');
 if (existsSync(waterPath)) {
   const bytes = statSync(waterPath).size;
-  console.log(`OK  assets/water-data.js size=${bytes}`);
-  if (bytes < 1_000_000) {
+  console.log(`OK  assets/water-data.js (optional local pack) size=${bytes}`);
+  if (bytes < 1_000) {
     console.error(`FAIL assets/water-data.js too small (${bytes} bytes)`);
     ok = false;
   } else {
@@ -60,22 +78,30 @@ if (existsSync(waterPath)) {
       ok = false;
     }
   }
+} else {
+  console.log('—   assets/water-data.js (optional, not shipped)');
 }
 
 const indexHtml = join(root, 'index.html');
 if (existsSync(indexHtml)) {
   const html = readFileSync(indexHtml, 'utf8');
-  if (!html.includes('assets/water-data.js')) {
-    console.error('FAIL index.html does not reference assets/water-data.js');
+  if (!html.includes('water-pack.json') || !html.includes('assets/water-data.js')) {
+    console.error('FAIL index.html lost water-pack.json / assets/water-data.js loader path');
     ok = false;
   } else {
-    console.log('OK  index.html references assets/water-data.js');
+    console.log('OK  index.html keeps water-pack.json + optional water-data.js loader');
   }
   if (!html.includes('ensureWaterData') || !html.includes('__TUNER_BASE__')) {
     console.error('FAIL index.html missing ensureWaterData / __TUNER_BASE__ loader');
     ok = false;
   } else {
     console.log('OK  index.html has ensureWaterData + __TUNER_BASE__');
+  }
+  if (!html.includes('not-shipped') && !html.includes('optional')) {
+    console.error('FAIL index.html should treat missing water as optional / not-shipped');
+    ok = false;
+  } else {
+    console.log('OK  index.html treats water as optional');
   }
   if (!html.includes('three@0.160.0')) {
     console.error('FAIL index.html missing Three.js script');

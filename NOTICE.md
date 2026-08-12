@@ -16,8 +16,8 @@ and terms of service for your use case.
 | Resource | Role | Notes |
 |----------|------|--------|
 | AWS Terrarium DEM tiles | Hillshade / terrain | Default demo endpoints are public Terrarium-encoded terrain-rgb style tiles. Usage is subject to AWS / tile host policies. Attribution in-map: terrain source. |
-| Satellite / basemap tiles | Optional raster base | **Not enabled by default.** Configure only tile URLs you are allowed to use (official provider key, self-hosted cache, etc.). This repo does **not** grant a map-tile license. |
-| `water-data.js` | China water overlay | Separate data terms — see DATA-PROVENANCE.md and [LICENSE-EXCEPTIONS.md](LICENSE-EXCEPTIONS.md). |
+| Satellite / basemap tiles | Optional raster base | Configure only tile URLs you are allowed to use (official provider key, self-hosted cache, etc.). This repo does **not** grant a map-tile license. |
+| Optional local `water-data.js` | Water overlay | **Not shipped** in this repository. If you supply your own file under `tuner/assets/`, it stays under your data terms — see DATA-PROVENANCE.md and [LICENSE-EXCEPTIONS.md](LICENSE-EXCEPTIONS.md). |
 
 ## Agent skill packaging
 
@@ -28,4 +28,4 @@ integration is documented as an optional production host.
 ## License scope
 
 - Code & docs: MIT — root [LICENSE](LICENSE)
-- Data / showcase media / third-party services: [LICENSE-EXCEPTIONS.md](LICENSE-EXCEPTIONS.md)
+- Showcase media / third-party services / any user-supplied geodata: [LICENSE-EXCEPTIONS.md](LICENSE-EXCEPTIONS.md)

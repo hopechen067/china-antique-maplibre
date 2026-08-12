@@ -29,13 +29,14 @@ Enable a raster basemap only with tile URLs you are allowed to use. See repo roo
 node verify.mjs
 ```
 
-Checks for `index.html`, tile config, water/city assets, and default presets.
+Checks for `index.html`, tile config, city assets, and default presets.
+Optional local `assets/water-data.js` is validated only if present.
 
 ## Defaults
 
 - Preset: `preset-antique-default.json` (copy: `presets/antique-default.json`)
 - Sites: `assets/sample-sites.json`
-- Water: `assets/water-data.js` + `assets/water-manifest.json` (not MIT — `DATA-PROVENANCE.md` / `LICENSE-EXCEPTIONS.md`)
+- Water: **not shipped**. Flag file `assets/water-pack.json` (`enabled: false`). Optional local `assets/water-data.js` (gitignored) — see root `DATA-PROVENANCE.md` / `references/water-overlay.md`
 - Public demo: GitHub Pages publishes this `tuner/` folder to the site root (`assets/…` paths stay relative)
 
 Export JSON, then migrate into HyperFrames. Do not host final renders on this page.

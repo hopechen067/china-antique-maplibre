@@ -1,14 +1,22 @@
 # Water overlay · CHINA_WATER_DATA
 
-Full-China water overlay bundled with the tuner / skill for MapLibre layers.
+Optional MapLibre water layers. Hydrography data is **not redistributed** in this repository (license / redistribution risk). The tuner keeps the loader and paint UI so you can supply your own pack locally.
 
-**License:** not under repository MIT until upstream provenance is cleared. See root [`DATA-PROVENANCE.md`](../../DATA-PROVENANCE.md).
+**License:** this project does not ship or MIT-license a water pack. See root [`DATA-PROVENANCE.md`](../../DATA-PROVENANCE.md).
 
-## Data object
+## Data object (user-supplied)
 
-Global: `window.CHINA_WATER_DATA` from `tuner/assets/water-data.js`.
+1. Place a local file at `tuner/assets/water-data.js` (gitignored) that assigns:
 
-Manifest metadata: `tuner/assets/water-manifest.json` (`id`: `china-water-full-v1`).
+```js
+window.CHINA_WATER_DATA = { /* FeatureCollections */ };
+```
+
+2. Set `"enabled": true` in the shipped `tuner/assets/water-pack.json` (default is `false` so the demo never fetches a missing large pack).
+
+Optional local metadata file: `tuner/assets/water-manifest.json` (also gitignored; not required by the loader).
+
+With the default pack flag the demo boots normally: basemap + Terrarium hillshade + antique CSS; water toggles simply have no layers.
 
 ### Layers (FeatureCollections)
 
@@ -20,7 +28,7 @@ Manifest metadata: `tuner/assets/water-manifest.json` (`id`: `china-water-full-v
 | `chinaLakes` | Polygon | Lakes |
 | `highlightWaterSystems` | LineString | Narrative highlight subset (alias: legacy `qilianWaterSystems`) |
 
-Manifest `highlightSystems` lists keyword groups used to build / document the highlight subset (e.g. 黑河, 石羊, 疏勒). Geographic river names in keywords are OK.
+If you build a highlight subset, document keyword groups yourself (e.g. 黑河, 石羊, 疏勒). Geographic river names in keywords are OK.
 
 ## MapLibre paint keys
 
@@ -60,8 +68,12 @@ Teal parchment water (see preset):
 - Rivers L3 / L2 / L1: `rgba(48,112,128,0.55)` → `rgba(45,110,125,0.88)` → `rgba(42,105,120,0.95)`
 - Highlight: `rgba(38,100,118,1)`, width `2.4`
 
-Tune live in the tuner; export JSON for HyperFrames.
+Tune live in the tuner when a local pack is present; export JSON for HyperFrames.
 
-## Counts (manifest)
+## Enabling locally
 
-Approximate feature counts are listed in `water-manifest.json` → `counts` for sanity checks after packaging.
+1. Produce GeoJSON FeatureCollections matching the keys above (use data you may license).
+2. Export as `window.CHINA_WATER_DATA = { ... }` in `tuner/assets/water-data.js`.
+3. Set `enabled: true` in `tuner/assets/water-pack.json`.
+4. Serve `tuner/` over HTTP and refresh — `ensureWaterData()` loads the file when enabled.
+5. Run `node verify.mjs` (public default keeps `enabled: false`; validates a local `water-data.js` if present).

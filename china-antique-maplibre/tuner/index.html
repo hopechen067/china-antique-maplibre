@@ -4,12 +4,13 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>古地图色调调参器 · MapLibre + Terrarium</title>
-  <meta name="description" content="China antique parchment MapLibre tuner — EOX Sentinel-2, Terrarium hillshade, water overlay. Live demo." />
+  <meta name="description" content="China antique parchment MapLibre tuner — EOX Sentinel-2, Terrarium hillshade, optional user-supplied water overlay. Live demo." />
   <!--
     Directory-safe asset base for GitHub project Pages.
     `.../china-antique-maplibre` (no trailing slash) + relative `assets/x`
     otherwise resolves to `https://<user>.github.io/assets/x` (404).
     Pages usually 301-redirects to the slash URL; we still normalize.
+    Water pack is optional and not preloaded (not shipped in this repo).
   -->
   <script>
     (function () {
@@ -20,11 +21,6 @@
         path += '/';
       }
       window.__TUNER_BASE__ = location.origin + path;
-      var preload = document.createElement('link');
-      preload.rel = 'preload';
-      preload.as = 'script';
-      preload.href = window.__TUNER_BASE__ + 'assets/water-data.js';
-      document.head.appendChild(preload);
     })();
   </script>
   <link rel="stylesheet" href="https://unpkg.com/maplibre-gl@5.6.0/dist/maplibre-gl.css" />
@@ -203,7 +199,7 @@
     #water-warn {
       display: none;
       margin-top: 4px;
-      color: #e0a060;
+      color: var(--muted);
     }
 
     #demo-banner {
@@ -723,7 +719,7 @@
     <aside id="panel">
       <div id="panel-header">
         <h1>古地图色调调参器</h1>
-        <p>MapLibre + Terrarium 山影 · EOX Sentinel-2 底图 · 仿手绘羊皮纸古卷<br />拖动滑杆实时预览，参数可导出 JSON。其他底图请改 map-tiles.config.local.js。</p>
+        <p>MapLibre + Terrarium 山影 · EOX Sentinel-2 底图 · 仿手绘羊皮纸古卷<br />拖动滑杆实时预览，参数可导出 JSON。水系层可选（本仓库不附带水系数据）。其他底图请改 map-tiles.config.local.js。</p>
       </div>
 
       <div id="panel-actions">
@@ -840,9 +836,9 @@
 
         <!-- 5. 水系 -->
         <details class="group" open>
-          <summary>水系（一/二/三级 + 湖 + 高亮）</summary>
+          <summary>水系（可选 · 一/二/三级 + 湖 + 高亮）</summary>
           <div class="group-body">
-            <p class="hint">一级=hyd1 · 二级=hyd2 · 三级画面层=资料四级 River4（真·三级.shp 与二级相同）· 高亮=highlightSystems 叙事子集</p>
+            <p class="hint">水系数据不随仓库分发。若需叠加：① 放入自有 <code>assets/water-data.js</code>（定义 <code>window.CHINA_WATER_DATA</code>）；② 将 <code>assets/water-pack.json</code> 的 <code>enabled</code> 设为 <code>true</code>；③ 刷新。接口见 <code>references/water-overlay.md</code>。</p>
             <div class="ctrl" data-key="water.lakeFill" data-type="rgba">
               <label>湖泊填充 lake-fill</label>
               <div class="rgba-row">
@@ -932,7 +928,7 @@
               <input type="range" min="0.4" max="6" step="0.05" />
             </div>
             <p class="hint">河名：主名（黄河/石羊/黑河/疏勒等）默认显示；支流名需放大到约 20 km（zoom≈9.5）。湖名：仅主湖（青海湖/哈拉湖/居延海/扎陵湖/鄂陵湖）。河湖名无黑底、字号小于城池，避免抢视线。点「河湖名」可开关。</p>
-            <div id="water-stats" class="summary-box">水系统计加载中…</div>
+            <div id="water-stats" class="summary-box">水系层可选 · 检查本地数据…</div>
           </div>
         </details>
 
@@ -1013,7 +1009,7 @@
 
   <div id="toast"></div>
 
-  <!-- 水系数据（~7MB）改由 boot()→ensureWaterData() 显式等待后再 initMap，避免竞态 -->
+  <!-- 可选水系：boot()→ensureWaterData() 探测后 initMap；缺失时安静跳过 -->
   <script>
   (function () {
     'use strict';
@@ -2479,96 +2475,113 @@
       el.style.display = 'block';
     }
 
-    function loadScriptOnce(url) {
-      return new Promise(function (resolve, reject) {
-        var s = document.createElement('script');
-        s.src = url;
-        s.async = true;
-        s.onload = function () {
-          resolve();
-        };
-        s.onerror = function () {
-          reject(new Error('script onerror ' + url));
-        };
-        document.head.appendChild(s);
-      });
-    }
-
     /**
-     * Load water overlay before initMap (no race).
-     * URL is built from __TUNER_BASE__ so Pages project paths stay correct
-     * even if the address bar omits the trailing slash.
+     * Optional water overlay before initMap (no race).
+     * Default: read tiny assets/water-pack.json (enabled:false) and skip
+     * fetching the large pack — no expected 404 on water-data.js.
+     * When enabled:true, load src (absolute via __TUNER_BASE__).
      */
     async function ensureWaterData() {
       if (isWaterDataReady()) {
         return { ok: true, via: 'preexisting' };
       }
 
-      const url = tunerAssetUrl('assets/water-data.js');
-      setWaterWarn('水系数据加载中（约 7MB）…');
+      var packUrl = tunerAssetUrl('assets/water-pack.json');
+      var pack = { enabled: false, src: 'assets/water-data.js' };
+      try {
+        var packRes = await fetch(packUrl, { cache: 'default' });
+        if (packRes.ok) {
+          pack = Object.assign(pack, await packRes.json());
+        }
+      } catch (e) {
+        // Keep defaults; treat as not shipped.
+      }
+
+      if (!pack.enabled) {
+        return {
+          ok: false,
+          reason: 'not-shipped',
+          detail: 'water-pack.json enabled=false',
+          url: packUrl,
+        };
+      }
+
+      const url = tunerAssetUrl(pack.src || 'assets/water-data.js');
+
+      var res;
+      try {
+        res = await fetch(url, { cache: 'default' });
+      } catch (e) {
+        return {
+          ok: false,
+          reason: 'optional-absent',
+          detail: String((e && e.message) || e),
+          url: url,
+        };
+      }
+
+      if (res.status === 404 || res.status === 403 || res.status === 410) {
+        return {
+          ok: false,
+          reason: 'not-shipped',
+          detail: res.status + ' ' + url,
+          url: url,
+        };
+      }
+      if (!res.ok) {
+        return {
+          ok: false,
+          reason: 'http',
+          detail: res.status + ' ' + url,
+          url: url,
+        };
+      }
+
+      var code = await res.text();
+      if (!code || code.indexOf('CHINA_WATER_DATA') === -1) {
+        return {
+          ok: false,
+          reason: 'empty',
+          detail: url + ' (no CHINA_WATER_DATA assignment)',
+          url: url,
+        };
+      }
 
       try {
-        await loadScriptOnce(url);
-        if (isWaterDataReady()) {
-          return { ok: true, via: 'script', url: url };
+        (0, eval)(code);
+        if (!isWaterDataReady()) {
+          return { ok: false, reason: 'parse', detail: url, url: url };
         }
-        return { ok: false, reason: 'parse', detail: url };
-      } catch (scriptErr) {
-        // Fetch+eval fallback (same absolute URL) if <script> injection failed
-        try {
-          var res = await fetch(url, { cache: 'default' });
-          if (!res.ok) {
-            return {
-              ok: false,
-              reason: 'http',
-              detail: res.status + ' ' + url,
-            };
-          }
-          var code = await res.text();
-          if (!code || code.indexOf('CHINA_WATER_DATA') === -1) {
-            return {
-              ok: false,
-              reason: 'empty',
-              detail: url + ' (no CHINA_WATER_DATA assignment)',
-            };
-          }
-          (0, eval)(code);
-          if (!isWaterDataReady()) {
-            return { ok: false, reason: 'parse', detail: url };
-          }
-          return { ok: true, via: 'fetch', url: url };
-        } catch (e) {
-          return {
-            ok: false,
-            reason: 'network',
-            detail: String((e && e.message) || e || scriptErr),
-            url: url,
-          };
-        }
+        return { ok: true, via: 'fetch', url: url };
+      } catch (e) {
+        return {
+          ok: false,
+          reason: 'parse',
+          detail: String((e && e.message) || e),
+          url: url,
+        };
       }
     }
 
-    function waterFailMessage(result) {
-      if (result && result.reason === 'http') {
-        return (
-          '⚠ 水系数据未找到（' +
-          result.detail +
-          '）。若本地打开请用 HTTP 静态服务运行 tuner/；公开演示应提供 assets/water-data.js。'
-        );
+    function waterOptionalMessage(result) {
+      if (!result || result.ok) return '';
+      if (result.reason === 'not-shipped' || result.reason === 'optional-absent') {
+        return '水系层可选 · 本仓库未附带水系数据。启用：本地 water-data.js + water-pack.json enabled=true。';
       }
-      if (result && (result.reason === 'network' || result.reason === 'empty')) {
-        return (
-          '⚠ 水系数据下载失败（约 7MB，需联网）。请刷新重试；水系层已暂时跳过。'
-        );
+      if (result.reason === 'empty' || result.reason === 'parse') {
+        return '水系文件无法解析（需定义 window.CHINA_WATER_DATA）。底图 / 山影调参不受影响。';
       }
-      return '⚠ 水系数据不可用，水系层已跳过（不影响底图 / 山影调参）。';
+      if (result.reason === 'http') {
+        return '水系层可选 · 未能读取水系文件（不影响底图 / 山影调参）。';
+      }
+      return '水系层可选 · 当前未启用（不影响底图 / 山影调参）。';
     }
 
     function initMap() {
       waterAvailable = isWaterDataReady();
 
       if (!waterAvailable) {
-        setWaterWarn(waterFailMessage(window.__WATER_DATA_LOAD_RESULT));
+        setWaterWarn(waterOptionalMessage(window.__WATER_DATA_LOAD_RESULT));
       } else {
         setWaterWarn('');
       }
@@ -2625,6 +2638,7 @@
         }
         try {
           if (waterAvailable) addWaterLayers();
+          else updateWaterStats();
         } catch (e) {
           console.warn('水系图层添加失败', e);
         }
@@ -2675,7 +2689,9 @@
       if (!el) return;
       const d = window.CHINA_WATER_DATA;
       if (!d) {
-        el.textContent = '未加载 CHINA_WATER_DATA';
+        el.textContent =
+          '水系层可选 · 本仓库未附带水系数据。\n' +
+          '启用：放入 assets/water-data.js（window.CHINA_WATER_DATA），并将 water-pack.json 的 enabled 设为 true 后刷新。';
         return;
       }
       function n(fc) { return fc && fc.features ? fc.features.length : 0; }
@@ -2979,11 +2995,21 @@
         }
       }
 
-      // Water (~7MB) must resolve before initMap snapshots waterAvailable.
+      // Optional water pack (not shipped). Resolve before initMap snapshots waterAvailable.
       const waterResult = await ensureWaterData();
       window.__WATER_DATA_LOAD_RESULT = waterResult;
       if (!waterResult.ok) {
-        console.warn('[tuner] water overlay unavailable', waterResult);
+        if (
+          waterResult.reason === 'not-shipped' ||
+          waterResult.reason === 'optional-absent'
+        ) {
+          console.info(
+            '[tuner] water overlay not shipped / not present (optional)',
+            waterResult.reason
+          );
+        } else {
+          console.info('[tuner] water overlay skipped', waterResult);
+        }
       } else {
         console.info(
           '[tuner] CHINA_WATER_DATA ready via',

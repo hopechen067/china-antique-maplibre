@@ -23,9 +23,11 @@ node_modules/
 .python-version
 __pycache__/
 
-# Optional large local water rebuilds
+# Optional large local water rebuilds / user-supplied packs (not redistributed)
 *.geojson.bak
 water-data.full.js
+china-antique-maplibre/tuner/assets/water-data.js
+china-antique-maplibre/tuner/assets/water-manifest.json
 
 # Local preview helpers
 .preview-tools/
