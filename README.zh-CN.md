@@ -75,7 +75,73 @@ https://hopechen067.github.io/china-antique-maplibre/media/hexi-ep07-demo-480p.m
 | 许可证 | 代码/文档 [MIT](LICENSE)；水系与展示媒体见 LICENSE 例外 |
 | 在线演示 | GitHub Pages → `china-antique-maplibre/tuner` |
 
+## 快速拉取（安装）
+
+### 1）克隆仓库
+
+```bash
+git clone https://github.com/hopechen067/china-antique-maplibre.git
+cd china-antique-maplibre
+```
+
+之后更新：
+
+```bash
+cd china-antique-maplibre
+git pull
+```
+
+### 2）安装为 Agent Skill（复制目录）
+
+Skill 本体在 `china-antique-maplibre/` 文件夹。把它复制到你的 agent skills 目录，然后重载 skills。
+
+**Windows（PowerShell）** — 按你用的宿主选路径：
+
+```powershell
+# Grok 等常用用户 skills 目录
+$src = ".\china-antique-maplibre"
+$dst = Join-Path $env:USERPROFILE ".grok\skills\china-antique-maplibre"
+New-Item -ItemType Directory -Force -Path (Split-Path $dst) | Out-Null
+Copy-Item -Recurse -Force $src $dst
+```
+
+```powershell
+# Codex 用户 skills（若你用 Codex）
+$src = ".\china-antique-maplibre"
+$dst = Join-Path $env:USERPROFILE ".codex\skills\china-antique-maplibre"
+New-Item -ItemType Directory -Force -Path (Split-Path $dst) | Out-Null
+Copy-Item -Recurse -Force $src $dst
+```
+
+**macOS / Linux：**
+
+```bash
+git clone https://github.com/hopechen067/china-antique-maplibre.git
+cp -R china-antique-maplibre/china-antique-maplibre ~/.grok/skills/china-antique-maplibre
+# 或：~/.codex/skills/china-antique-maplibre
+```
+
+一条命令（Unix：克隆 + 装 skill）：
+
+```bash
+git clone --depth 1 https://github.com/hopechen067/china-antique-maplibre.git \
+  && cp -R china-antique-maplibre/china-antique-maplibre ~/.grok/skills/china-antique-maplibre
+```
+
+### 3）复制给 Agent 的话术
+
+```text
+请使用 china-antique-maplibre skill。
+在线调参：https://hopechen067.github.io/china-antique-maplibre/
+仓库：https://github.com/hopechen067/china-antique-maplibre
+我会在 demo 里调好风格后导出 JSON，请按 SKILL.md / references 应用到地图场景（jumpTo + idle，encoding terrarium）。
+```
+
+风格流程：打开 [在线演示](https://hopechen067.github.io/china-antique-maplibre/) → 调参 → **复制 JSON** → 粘贴给 agent。
+
 ## 快速开始（本机调参）
+
+仅在你要**本机离线**跑调参器时需要；用公网 demo 可跳过。
 
 ```bash
 cd china-antique-maplibre/tuner

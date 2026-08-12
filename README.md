@@ -75,7 +75,73 @@ More files: [showcases/hexi-ep07/](showcases/hexi-ep07/)
 | License | [MIT](LICENSE) for code/docs, with data & showcase media exceptions |
 | Hosted demo | GitHub Pages → `china-antique-maplibre/tuner` |
 
+## Quick pull (install)
+
+### 1) Clone the repo
+
+```bash
+git clone https://github.com/hopechen067/china-antique-maplibre.git
+cd china-antique-maplibre
+```
+
+Update later:
+
+```bash
+cd china-antique-maplibre
+git pull
+```
+
+### 2) Install as an agent skill (copy folder)
+
+The skill lives in `china-antique-maplibre/`. Copy that folder into your agent skills directory, then reload skills.
+
+**Windows (PowerShell)** — pick the path your host uses:
+
+```powershell
+# Grok / common user skills dir
+$src = ".\china-antique-maplibre"
+$dst = Join-Path $env:USERPROFILE ".grok\skills\china-antique-maplibre"
+New-Item -ItemType Directory -Force -Path (Split-Path $dst) | Out-Null
+Copy-Item -Recurse -Force $src $dst
+```
+
+```powershell
+# Codex user skills (if you use Codex)
+$src = ".\china-antique-maplibre"
+$dst = Join-Path $env:USERPROFILE ".codex\skills\china-antique-maplibre"
+New-Item -ItemType Directory -Force -Path (Split-Path $dst) | Out-Null
+Copy-Item -Recurse -Force $src $dst
+```
+
+**macOS / Linux:**
+
+```bash
+git clone https://github.com/hopechen067/china-antique-maplibre.git
+cp -R china-antique-maplibre/china-antique-maplibre ~/.grok/skills/china-antique-maplibre
+# or: ~/.codex/skills/china-antique-maplibre
+```
+
+One-shot clone + install (Unix):
+
+```bash
+git clone --depth 1 https://github.com/hopechen067/china-antique-maplibre.git \
+  && cp -R china-antique-maplibre/china-antique-maplibre ~/.grok/skills/china-antique-maplibre
+```
+
+### 3) Paste this to your agent
+
+```text
+请使用 china-antique-maplibre skill。
+在线调参：https://hopechen067.github.io/china-antique-maplibre/
+仓库：https://github.com/hopechen067/china-antique-maplibre
+我会在 demo 里调好风格后导出 JSON，请按 SKILL.md / references 应用到地图场景（jumpTo + idle，encoding terrarium）。
+```
+
+Style workflow: open the [live demo](https://hopechen067.github.io/china-antique-maplibre/) → tune → **Copy JSON** → paste to your agent.
+
 ## Quick start (local tuner)
+
+Only needed if you want to run the tuner offline on your machine (not required for the public demo).
 
 ```bash
 cd china-antique-maplibre/tuner
